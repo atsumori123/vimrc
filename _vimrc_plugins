@@ -1,0 +1,143 @@
+"-------------------------------------------------------
+" Vundle
+"-------------------------------------------------------
+set nocompatible
+filetype off
+set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+
+call vundle#begin()
+let s:plugin_list = []
+call add(s:plugin_list, 'VundleVim/Vundle.vim')
+"call add(s:plugin_list, 'jdkanani/vim-material-theme')
+"call add(s:plugin_list, 'habamax/vim-gruvbit')
+call add(s:plugin_list, 'atsumori123/hybrid.vim')
+"call add(s:plugin_list, 'lambdalisue/fern.vim')
+call add(s:plugin_list, 'nelstrom/vim-visual-star-search')
+call add(s:plugin_list, 'vim-scripts/taglist.vim')
+call add(s:plugin_list, 'easymotion/vim-easymotion')
+call add(s:plugin_list, 'Shougo/ddc-around')
+call add(s:plugin_list, 'Shougo/ddc-matcher_head')
+call add(s:plugin_list, 'Shougo/ddc.vim')
+call add(s:plugin_list, 'vim-denops/denops.vim')
+call add(s:plugin_list, 'tpope/vim-fugitive')
+call add(s:plugin_list, 'atsumori123/stline.vim')
+call add(s:plugin_list, 'atsumori123/oldfiles.vim')
+call add(s:plugin_list, 'atsumori123/buffer.vim')
+call add(s:plugin_list, 'atsumori123/minfy.vim')
+call add(s:plugin_list, 'atsumori123/gr.vim')
+call add(s:plugin_list, 'atsumori123/keyaction.vim')
+call add(s:plugin_list, 'vim-jp/vimdoc-ja')
+call add(s:plugin_list, 'atsumori123/convert.vim')
+call add(s:plugin_list, 'atsumori123/tools.vim')
+for item in s:plugin_list | execute("Plugin item") | endfor
+call vundle#end()
+
+filetype plugin indent on
+syntax enable
+
+function! s:Enabled(name) abort
+	return index(s:plugin_list, a:name) != -1 ? 1 : 0
+endfunction
+
+"-------------------------------------------------------
+" Plugins custum setting
+"-------------------------------------------------------
+if s:Enabled('jdkanani/vim-material-theme')
+	set background=dark
+	colorscheme material-theme
+endif
+
+if s:Enabled('habamax/vim-gruvbit')
+	set termguicolors
+	colorscheme gruvbit
+endif
+
+if s:Enabled('atsumori123/hybrid.vim')
+	colorscheme hybrid
+endif
+
+if s:Enabled('vim-scripts/taglist.vim')
+	let Tlist_GainFocus_On_ToggleOpen = 1	" When you open the tag list, focus on the tag list
+	let Tlist_File_Fold_Auto_Close = 1		" Automatically close tag list when file is inactive
+	let Tlist_Show_One_File = 1				" Show only the tags of the source you are currently editing
+	nnoremap <F11> :TlistToggle<CR>
+endif
+
+if s:Enabled('easymotion/vim-easymotion')
+	let g:EasyMotion_do_mapping = 0
+	let g:EasyMotion_smartcase = 1
+	let g:EasyMotion_use_migemo = 1
+	let g:EasyMotion_use_upper = 1
+	let g:EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
+	nmap f <Plug>(easymotion-bd-f)
+	nmap F <Plug>(easymotion-overwin-f)
+	highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
+endif
+
+if s:Enabled('Shougo/ddc.vim')
+	call ddc#custom#patch_global('sources', ['around'])
+	call ddc#custom#patch_global('sourceOptions', {
+	    \ '_': {
+	    \     'matchers': ['matcher_head'],
+	    \ }})
+	inoremap <silent><expr><Tab> pumvisible() ? '<C-n>' : '<Tab>'
+	inoremap <silent><expr><S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+	call ddc#enable()
+endif
+
+if s:Enabled('atsumori123/stline.vim')
+	let g:stline_theme = 'material'
+	nmap <leader>1 <Plug>STLine.Go(1)
+	nmap <leader>2 <Plug>STLine.Go(2)
+	nmap <leader>3 <Plug>STLine.Go(3)
+	nmap <leader>4 <Plug>STLine.Go(4)
+	nmap <leader>5 <Plug>STLine.Go(5)
+	nmap <leader>6 <Plug>STLine.Go(6)
+	nmap <leader>7 <Plug>STLine.Go(7)
+	nmap <leader>8 <Plug>STLine.Go(8)
+	nmap <leader>9 <Plug>STLine.Go(9)
+	nmap <leader>0 <Plug>STLine.Go(10)
+endif
+
+if s:Enabled('atsumori123/gr.vim')
+	noremap <silent><leader>g :Gr<CR>
+	let Gr_Grep_Proc = 'rg'
+endif
+
+if s:Enabled('atsumori123/tools.vim')
+	nnoremap <leader>t :Tools<CR>
+endif
+
+if s:Enabled('atsumori123/convert.vim')
+	noremap <leader>c :CNV<CR>
+endif
+
+if s:Enabled('atsumori123/oldfiles.vim')
+	nnoremap <leader>l :OL<CR>
+endif
+
+if s:Enabled('atsumori123/buffer.vim')
+	nnoremap <leader>b :BF b<CR>
+	nnoremap <leader>m :BF m<CR>
+	nnoremap <leader>x :BF c<CR>
+endif
+
+if s:Enabled('atsumori123/minfy.vim')
+	nnoremap <silent><c-e> :execute "Minfy ".expand("%:p:h")<CR>
+endif
+
+if s:Enabled('atsumori123/keyaction.vim')
+	nnoremap <silent><S-j> :BN<CR>
+	nnoremap <silent><S-k> :BP<CR>
+	nnoremap <silent>zc :ZC<CR>
+	nnoremap <silent><leader>q :ToggleQuickfix<CR>
+	noremap <silent><leader>r :Replace<CR>
+endif
+
+"-------------------------------------------------------
+" Scripts
+"-------------------------------------------------------
+" test"
+nnoremap <leader>[ :source ~/vimfiles/script/test.vim<CR>
+
+unlet s:plugin_list

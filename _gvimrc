@@ -1,0 +1,36 @@
+if has('multi_byte_ime')
+  highlight Cursor guifg=NONE guibg=DimGrey
+  highlight CursorIM guifg=NONE guibg=DarkTurquoise
+endif
+
+" window colums
+set columns=150
+" window lines
+set lines=70
+
+" Harf-Width character size
+set guifont=cica:h12
+"set guifont=consolas:h11
+" Double-byte character size
+set guifontwide=cica:h12
+"set guifontwide=consolas:h11
+" Disable cursol blink
+set guicursor=a:blinkon0
+
+" Underline the current line(color terminal)
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" Underline the current line(gui)
+highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+" Hide the menu bar
+set guioptions-=m
+" Hide the tool bar
+set guioptions-=T
+" Hide the left and right scroll bar
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+" Hide the horizon scroll bar
+set guioptions-=b
+
