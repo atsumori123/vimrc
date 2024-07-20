@@ -151,7 +151,7 @@ noremap <Esc><Esc> :nohlsearch<CR><Esc>
 " 検索開始でカーソルを次の候補に移動させない
 nnoremap <silent> * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call histadd("/", '\<'.@z.'\>')<CR>
 nnoremap <silent> g* "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:call histadd("/", @z)<CR>
-" 置換
+" QuickFixウィンドウの表示/非表示
 nnoremap <silent><leader>q :execute('let nr = winnr("$") \| copen \| if nr == winnr("$") \| cclose \| else \| set modifiable \| endif')<CR>
 " Open QuickFix window under vertical split
 autocmd Filetype qf wincmd J

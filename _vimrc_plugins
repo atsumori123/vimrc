@@ -11,7 +11,6 @@ call add(s:plugin_list, 'VundleVim/Vundle.vim')
 "call add(s:plugin_list, 'jdkanani/vim-material-theme')
 "call add(s:plugin_list, 'habamax/vim-gruvbit')
 call add(s:plugin_list, 'atsumori123/hybrid.vim')
-"call add(s:plugin_list, 'lambdalisue/fern.vim')
 call add(s:plugin_list, 'nelstrom/vim-visual-star-search')
 call add(s:plugin_list, 'vim-scripts/taglist.vim')
 call add(s:plugin_list, 'easymotion/vim-easymotion')
@@ -20,13 +19,12 @@ call add(s:plugin_list, 'Shougo/ddc-matcher_head')
 call add(s:plugin_list, 'Shougo/ddc.vim')
 call add(s:plugin_list, 'vim-denops/denops.vim')
 call add(s:plugin_list, 'tpope/vim-fugitive')
+call add(s:plugin_list, 'vim-jp/vimdoc-ja')
 call add(s:plugin_list, 'atsumori123/stline.vim')
 call add(s:plugin_list, 'atsumori123/oldfiles.vim')
 call add(s:plugin_list, 'atsumori123/buffer.vim')
 call add(s:plugin_list, 'atsumori123/minfy.vim')
 call add(s:plugin_list, 'atsumori123/gr.vim')
-call add(s:plugin_list, 'atsumori123/keyaction.vim')
-call add(s:plugin_list, 'vim-jp/vimdoc-ja')
 call add(s:plugin_list, 'atsumori123/convert.vim')
 call add(s:plugin_list, 'atsumori123/tools.vim')
 for item in s:plugin_list | execute("Plugin item") | endfor
@@ -120,18 +118,14 @@ if s:Enabled('atsumori123/buffer.vim')
 	nnoremap <leader>b :BF b<CR>
 	nnoremap <leader>m :BF m<CR>
 	nnoremap <leader>x :BF c<CR>
+	nnoremap <silent><S-j> :BN<CR>
+	nnoremap <silent><S-k> :BP<CR>
+	nnoremap <silent>zc :ZC<CR>
+	noremap <silent><leader>r :Replace<CR>
 endif
 
 if s:Enabled('atsumori123/minfy.vim')
 	nnoremap <silent><c-e> :execute "Minfy ".expand("%:p:h")<CR>
-endif
-
-if s:Enabled('atsumori123/keyaction.vim')
-	nnoremap <silent><S-j> :BN<CR>
-	nnoremap <silent><S-k> :BP<CR>
-	nnoremap <silent>zc :ZC<CR>
-	nnoremap <silent><leader>q :ToggleQuickfix<CR>
-	noremap <silent><leader>r :Replace<CR>
 endif
 
 "-------------------------------------------------------
