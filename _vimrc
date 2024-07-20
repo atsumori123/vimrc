@@ -112,8 +112,6 @@ noremap <S-h> 0
 noremap <S-l> $
 " redo
 nnoremap U <C-r>
-" 置換
-"noremap <leader>r "zyiw:1,$s/\<<C-r>z\>//gc<LEFT><LEFT><LEFT>
 " 最後に編集した箇所に移動
 noremap <END> '.
 noremap <kEND> '.
@@ -153,5 +151,7 @@ noremap <Esc><Esc> :nohlsearch<CR><Esc>
 " 検索開始でカーソルを次の候補に移動させない
 nnoremap <silent> * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call histadd("/", '\<'.@z.'\>')<CR>
 nnoremap <silent> g* "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:call histadd("/", @z)<CR>
+" 置換
+nnoremap <silent><leader>q :execute('let nr = winnr("$") \| copen \| if nr == winnr("$") \| cclose \| else \| set modifiable \| endif')<CR>
 " Open QuickFix window under vertical split
 autocmd Filetype qf wincmd J
