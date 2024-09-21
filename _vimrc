@@ -88,6 +88,11 @@ set backspace=indent,eol,start
 "--------------------------------
 " カーソル後ろにペースト後、カーソルをペースト開始時の位置に戻す
 noremap \ P`[
+" INSERTモード中のカーソル移動
+inoremap <c-b> <Left>
+inoremap <c-j> <Down>
+inoremap <c-k> <Up>
+inoremap <c-l> <Right>
 " 削除のみ
 vnoremap d "_d
 nnoremap d "_d
@@ -124,6 +129,7 @@ nnoremap <CR> i<CR><ESC>
 noremap <BS> i<BS><ESC>l
 " jj = <ESC>
 inoremap <silent> jj <ESC>
+inoremap <C-j> <ESC>
 " インサートモードからノーマルモードに戻るときIMEをオフにする
 inoremap <ESC> <ESC>:set iminsert=0<CR>
 " 記録終了のキーマップを無効
@@ -139,6 +145,7 @@ nnoremap <C-j> ]c
 nnoremap <C-k> [c
 " If there are multiple declaration sources in tag jump, select from the list
 nnoremap t :exe("tjump ".expand('<cword>'))<CR>
+vnoremap t "zygv<ESC><ESC>:exe("tjump ".@z)<CR>
 " Back tag jamp
 nnoremap T <C-t>
 " バッファ同士でDiff
