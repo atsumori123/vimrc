@@ -3,6 +3,7 @@ let mapleader = "\<Space>"
 " Plugins/Scripts
 source $HOME/_vimrc_plugins
 
+syntax enable
 "--------------------------------
 " base configure
 "--------------------------------

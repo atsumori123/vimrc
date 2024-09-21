@@ -69,3 +69,14 @@ if s:ls_plugin_installed('chotto.vim')
 	noremap <silent><leader>g :ChGrep<CR>
 "	let Chotto_GrepCommand = 'ripgrep'
 endif
+
+" atsumori123/buffer.vim
+if s:ls_plugin_installed('buffer.vim')
+	nnoremap <leader>b :BF b<CR>
+	nnoremap <leader>m :BF m<CR>
+	nnoremap <leader>x :BF c<CR>
+	nnoremap <silent><S-j> :BN<CR>
+	nnoremap <silent><S-k> :BP<CR>
+	nnoremap <silent>zc :ZC<CR>
+	noremap <silent><leader>r :Replace<CR>
+endif
