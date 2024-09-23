@@ -32,12 +32,6 @@ if s:ls_plugin_installed('vim-easymotion')
 	highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
 endif
 
-" atsumori123/grpop.vim
-if s:ls_plugin_installed('grpop.vim')
-	noremap <silent><leader>g :Gr<CR>
-	let g:Chotto_GrepCommand = 'ripgrep'
-endif
-
 " atsumori123/minfy.vim
 if s:ls_plugin_installed('minfy.vim')
 	nnoremap <silent><c-e> :execute "Minfy ".expand("%:p:h")<CR>
@@ -64,10 +58,14 @@ if s:ls_plugin_installed('oldfiles.vim')
 endif
 
 " atsumori123/tools.vim
-if s:ls_plugin_installed('chotto.vim')
-	noremap <silent><leader>t :ChTools<CR>
-	noremap <silent><leader>g :ChGrep<CR>
-"	let Chotto_GrepCommand = 'ripgrep'
+if s:ls_plugin_installed('cmemo.vim')
+	noremap <silent><leader>t :CMemo<CR>
+endif
+
+" atsumori123/gr.vim
+if s:ls_plugin_installed('gr.vim')
+	noremap <silent><leader>g :Gr<CR>
+	let g:GR_GrepCommand = 'ripgrep'
 endif
 
 " atsumori123/buffer.vim
@@ -80,3 +78,5 @@ if s:ls_plugin_installed('buffer.vim')
 	nnoremap <silent>zc :ZC<CR>
 	noremap <silent><leader>r :Replace<CR>
 endif
+
+nnoremap <leader>[ :source ~/vimfiles/script/test.vim<CR>

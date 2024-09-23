@@ -4,7 +4,7 @@ PLUGINDIR="$HOME/vimfiles/pack/myplugins/start"
 
  case $1 in
 	i|install)
-		git clone --depth 1 "https://www.github.com/$2" "$PLUGINDIR/$(basename "$2")" ;;
+		git clone --depth 1 "https://github.com/$2" "$PLUGINDIR/$(basename "$2")" ;;
 
 	r|remove)
 		rm -rf -- "$PLUGINDIR/$(basename "$2")" ;;
