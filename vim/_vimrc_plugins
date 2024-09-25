@@ -1,0 +1,147 @@
+let s:VimPluginsPath = $HOME . '/vimplugins'
+
+"***************************************
+" Define load plugin
+"***************************************
+let s:VimPlugins = [
+			\ 'vim-lucius',
+			\ 'taglist.vim',
+			\ 'stline.vim',
+			\ 'gr.vim',
+			\ 'cmemo.vim',
+			\ 'oldfiles.vim',
+			\ 'buffer.vim',
+			\ 'minfy.vim',
+			\ 'vim-easymotion',
+			\ 'vim-fugitive',
+			\ 'vim-visual-star-search',
+			\ ]
+"			\ 'ddc-around',
+"			\ 'ddc-matcher_head',
+"			\ 'ddc.vim',
+
+function! s:Enabled(plugin) abort
+	return index(s:VimPlugins, a:plugin) != -1 ? 1 : 0
+endfunction
+
+"***************************************
+" Define plugin loading configuration
+"***************************************
+function! s:load_config() abort
+	" jonathanfilip/vim-lucius
+	if s:Enabled('vim-lucius')
+		colorscheme lucius
+	endif
+
+	" cocopon/iceberg.vim
+	if s:Enabled('iceberg.vim')
+		colorscheme iceberg
+	endif
+
+	" vim-scripts/taglist.vim
+	if s:Enabled('taglist.vim')
+		let Tlist_GainFocus_On_ToggleOpen = 1	" When you open the tag list, focus on the tag list
+		let Tlist_File_Fold_Auto_Close = 1		" Automatically close tag list when file is inactive
+		let Tlist_Show_One_File = 1				" Show only the tags of the source you are currently editing
+		nnoremap <F11> :TlistToggle<CR>
+	endif
+
+	" Shougo/ddc.vim
+	if s:Enabled('ddc.vim')
+		call ddc#custom#patch_global('sources', ['around'])
+		call ddc#custom#patch_global('sourceOptions', {
+			\ '_': {
+			\     'matchers': ['matcher_head'],
+			\ }})
+		inoremap <silent><expr><Tab> pumvisible() ? '<C-n>' : '<Tab>'
+		inoremap <silent><expr><S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+		call ddc#enable()
+	endif
+
+	" atsumori123/stline.vim
+	if s:Enabled('stline.vim')
+		let g:stline_theme = 'monochrome'
+		nmap <leader>1 <Plug>STLine.Go(1)
+		nmap <leader>2 <Plug>STLine.Go(2)
+		nmap <leader>3 <Plug>STLine.Go(3)
+		nmap <leader>4 <Plug>STLine.Go(4)
+		nmap <leader>5 <Plug>STLine.Go(5)
+		nmap <leader>6 <Plug>STLine.Go(6)
+		nmap <leader>7 <Plug>STLine.Go(7)
+		nmap <leader>8 <Plug>STLine.Go(8)
+		nmap <leader>9 <Plug>STLine.Go(9)
+		nmap <leader>0 <Plug>STLine.Go(10)
+	endif
+
+	" atsumori123/gr.vim
+	if s:Enabled('gr.vim')
+		noremap <silent><leader>g :Gr<CR>
+		let GR_Grep_Proc = 'vim'
+	endif
+
+	" atsumori123/cmemo.vim
+	if s:Enabled('cmemo.vim')
+		nnoremap <leader>t :CMemo<CR>
+	endif
+
+	" atsumori123/oldfiles.vim
+	if s:Enabled('oldfiles.vim')
+		nnoremap <leader>l :OL<CR>
+	endif
+
+	" atsumori123/buffer.vim
+	if s:Enabled('buffer.vim')
+		nnoremap <leader>b :BF b<CR>
+		nnoremap <leader>m :BF m<CR>
+		nnoremap <leader>x :BF c<CR>
+		nnoremap <silent><S-j> :BN<CR>
+		nnoremap <silent><S-k> :BP<CR>
+		nnoremap <silent>zc :ZC<CR>
+		noremap <silent><leader>r :Replace<CR>
+	endif
+
+	" atsumori123/minfy.vim
+	if s:Enabled('minfy.vim')
+		nnoremap <silent><c-e> :execute "Minfy ".expand("%:p:h")<CR>
+		let Minfy_use_easymotion = 0
+	endif
+
+	" vim-EasyMotionTarget
+	if s:Enabled('vim-easymotion')
+		let g:EasyMotion_do_mapping = 0
+		let g:EasyMotion_smartcase = 1
+		let g:EasyMotion_use_migemo = 1
+		let g:EasyMotion_use_upper = 1
+		let g:EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
+		nmap f <Plug>(easymotion-bd-f)
+		nmap F <Plug>(easymotion-overwin-f)
+	endif
+
+	" test
+	nnoremap <leader>[ :source ~/vimfiles/script/test.vim<CR>
+endfunction
+
+"***************************************
+" Define plugin lazy setup
+"***************************************
+function! s:lazy_setup() abort
+	" vim-EasyMotionTarget
+	if s:Enabled('vim-easymotion')
+		highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
+	endif
+endfunction
+
+"***************************************
+" Plugin add to runtimepath
+"***************************************
+for plugin in s:VimPlugins
+	let path = s:VimPluginsPath . '/' . plugin
+	exec 'set runtimepath+=' . path
+endfor
+call s:load_config()
+
+augroup LazySetup
+	autocmd!
+	autocmd vimenter * call s:lazy_setup()
+augroup END
+
