@@ -1,16 +1,71 @@
 #!/bin/bash
 
+#---------------------------------------
+# Plugin install directory
+#---------------------------------------
 plugindir="$HOME/vimplugins"
 
+#---------------------------------------
+# Define plugins
+#---------------------------------------
+plugins=(
+	"jonathanfilip/vim-lucius"
+	"vim-scripts/taglist.vim"
+	"easymotion/vim-easymotion"
+	"tpope/vim-fugitive"
+	"nelstrom/vim-visual-star-search"
+	"vim-jp/vimdoc-ja"
+	"atsumori123/stline.vim"
+	"atsumori123/gr.vim"
+	"atsumori123/cmemo.vim"
+	"atsumori123/oldfiles.vim"
+	"atsumori123/buffer.vim"
+	"atsumori123/minfy.vim"
+)
+
+#---------------------------------------
+# Script
+#---------------------------------------
 case $1 in
 	i|install)
-		git clone --depth 1 "https://github.com/$2" "$plugindir/$(basename "$2")" ;;
+		if [ "$#" -eq 2 ]; then
+			git clone --depth 1 https://github.com/$2 $plugindir/$(basename "$2")
+		else
+			for plugin in "${plugins[@]}"; do
+				if [ ! -d $plugindir/$(basename "$plugin") ]; then
+					echo ">>>>> "$plugin
+					git clone --depth 1 https://github.com/$plugin $plugindir/$(basename "$plugin")
+					echo ""
+					sleep 0.5
+				fi
+			done
+		fi
+		;;
 
 	r|remove)
-		rm -rf -- "$plugindir/$(basename "$2")" ;;
+		if [ "$#" -eq 2 ]; then
+			rm -rf -- "$plugindir/$(basename "$2")"
+		else
+			for path in $plugindir/*; do
+				if [ -d $path ]; then
+					dir=$(basename "$path")
+					if ! printf '%s\n' "${plugins[@]}" | grep -q $dir; then
+						echo -n "Remove \"$dir\" ? : "
+						read input
+						if [ ! -z $input ]; then
+							if [ $input = "y" ] || [ $input = "Y" ]; then
+								rm -rf -- $path
+							fi
+						fi
+					fi
+				fi
+			done
+		fi
+		;;
 
 	l|list)
 		ls -- "$plugindir" ;;
+
 	*)
 		echo ""
 		echo "Usage:"

@@ -106,7 +106,7 @@ function! s:load_config() abort
 		let Minfy_use_easymotion = 0
 	endif
 
-	" vim-EasyMotionTarget
+	"easymotion/vim-easymotion
 	if s:Enabled('vim-easymotion')
 		let g:EasyMotion_do_mapping = 0
 		let g:EasyMotion_smartcase = 1
@@ -125,7 +125,7 @@ endfunction
 " Define plugin lazy setup
 "***************************************
 function! s:lazy_setup() abort
-	" vim-EasyMotionTarget
+	"easymotion/vim-easymotion
 	if s:Enabled('vim-easymotion')
 		highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
 	endif
