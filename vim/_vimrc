@@ -101,15 +101,11 @@ vnoremap d "_d
 nnoremap d "_d
 vnoremap D "_D
 nnoremap D "_D
-vnoremap x "_x
 nnoremap x "_x
 vnoremap s "_s
 nnoremap s "_s
-" 切り取り
-nnoremap m d
-vnoremap m x
-nnoremap mm dd
-nnoremap M D
+vnoremap S "_S
+nnoremap S "_S
 " 折り返し時に表示行単位での移動できるようにする
 noremap <silent>j gj
 noremap <silent>k gk

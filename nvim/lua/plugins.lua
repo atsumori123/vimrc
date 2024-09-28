@@ -2,7 +2,6 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local VimPluginsPath = vim.env.HOME..[[\vimplugins]]
 
-
 ----------------------------------------
 -- Define load plugin
 ----------------------------------------
@@ -18,7 +17,8 @@ VimPlugins = {
 			'vim-easymotion',
 			'vim-fugitive',
 			'vim-visual-star-search',
-			}
+			'diffview.nvim',
+}
 --			'ddc-around',
 --			'ddc-matcher_head',
 --			'ddc.vim',
@@ -69,7 +69,7 @@ end
 
 	-- atsumori123/gr.vim
 	if Enabled('gr.vim') then
-		map('n', '<leader>g', ':Gr<CR>', opts)
+		map('', '<leader>g', ':Gr<CR>', opts)
 		vim.g.GR_Grep_Proc = 'vim'
 	end
 

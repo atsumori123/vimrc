@@ -20,15 +20,11 @@ map('v', 'd', '"_d', opts)
 map('n', 'd', '"_d', opts)
 map('v', 'D', '"_D', opts)
 map('n', 'D', '"_D', opts)
-map('v', 'x', '"_x', opts)
 map('n', 'x', '"_x', opts)
 map('v', 's', '"_s', opts)
 map('n', 's', '"_s', opts)
--- 切り取り
-map('n', 'm', 'd', opts)
-map('v', 'm', 'x', opts)
-map('n', 'mm', 'dd', opts)
-map('n', 'M', 'D', opts)
+map('v', 'S', '"_S', opts)
+map('n', 'S', '"_S', opts)
 -- 折り返し時に表示行単位での移動できるようにする
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
@@ -55,6 +51,9 @@ map('n', '<F12>', 'qt', opts)
 map('n', '<S-F12>', '@t', opts)
 -- 全て選択
 map('n', '<leader>a', 'ggVG', opts)
+-- 次/前の差分へ
+map('n', '<C-j>', ']c', opts)
+map('n', '<C-k>', '[c', opts)
 -- 文字サイズ変更
 map('n', '<C-UP>', [[:let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)+1','')<CR>]], bufopts)
 map('n', '<C-DOWN>', [[:let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)-1','')<CR>]], bufopts)
