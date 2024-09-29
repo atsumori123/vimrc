@@ -18,6 +18,7 @@ VimPlugins = {
 			'vim-fugitive',
 			'vim-visual-star-search',
 			'diffview.nvim',
+			'Comment.nvim',
 }
 --			'ddc-around',
 --			'ddc-matcher_head',
@@ -109,6 +110,20 @@ end
 		vim.g.EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
 		map('n', 'f', '<Plug>(easymotion-bd-f)', opts)
 		map('n', 'F', '<Plug>(easymotion-overwin-f)', opts)
+	end
+
+	-- sindrets/diffview.nvim
+	if Enabled('diffview.nvim') then
+		map('n', '<F7>', ':DiffviewOpen<CR>', opts)
+		map('n', '<F8>', ':DiffviewFileHistory<CR>', opts)
+		map('n', '<F9>', ':DiffviewClose<CR>', opts)
+	end
+
+	-- numToStr/Comment.nvim
+	if Enabled('Comment.nvim') then
+		require('Comment').setup()
+    	-- Toggle in VISUAL mode
+	    vim.keymap.set('x', '<leader>c', '<Plug>(comment_toggle_linewise_visual)')
 	end
 
 	-- test
