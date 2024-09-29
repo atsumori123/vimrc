@@ -1,6 +1,7 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-local VimPluginsPath = vim.env.HOME..[[\vimplugins]]
+local sep = vim.fn.execute('echo has("unix")') and '/' or '\\'
+local VimPluginsPath = vim.env.HOME..sep..'vimplugins'
 
 ----------------------------------------
 -- Define load plugin
@@ -66,7 +67,7 @@ local function load_config()
 		map('n', '<leader>8', '<Plug>STLine.Go(8)', opts)
 		map('n', '<leader>9', '<Plug>STLine.Go(9)', opts)
 		map('n', '<leader>0', '<Plug>STLine.Go(10)', opts)
-end
+	end
 
 	-- atsumori123/gr.vim
 	if Enabled('gr.vim') then
@@ -139,11 +140,12 @@ local lazy_setup = function()
 		vim.cmd('highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan')
 	end
 end
+
 ----------------------------------------
 -- Plugin add to runtimepath
 ----------------------------------------
 for k, plugin in pairs(VimPlugins) do
-	local path = VimPluginsPath .. '\\' .. plugin
+	local path = VimPluginsPath .. sep .. plugin
 	vim.fn.execute('set runtimepath+=' .. path)
 end
 load_config()
