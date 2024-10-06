@@ -12,9 +12,10 @@ map('i', '<c-b>', '<Left>', opts)
 map('i', '<c-j>', '<Down>', opts)
 map('i', '<c-k>', '<Up>', opts)
 map('i', '<c-l>', '<Right>', opts)
---カーソルの後ろにペースト後、カーソルをペースト開始時の位置に戻す
+-- 'q'による記録を無効
 map('', 'q', '<nop>', opts)
-map('n', '\\', 'P`[', opts)
+--カーソルの後ろにペースト後、カーソルをペースト開始時の位置に戻す
+map('n', '<leader>p', 'P`[', opts)
 -- 削除のみ
 map('v', 'd', '"_d', opts)
 map('n', 'd', '"_d', opts)
@@ -36,8 +37,9 @@ map('', '<S-l>', '$', opts)
 -- redo
 map('n', 'U', '<C-r>', opts)
 -- 最後に編集した箇所に移動
-map('n', '<END>', '\'.', opts)
-map('n', '<kEND>', '\'.', opts)
+map('n', '<leader>e', '`.', opts)
+-- 次のジャンプ箇所へ移動
+map('n', '<c-l>', '<c-i>', opts)
 -- Tabキーでウィンドウ切り替え
 map('n', '<Tab>', '<C-W>w', opts)
 map('n', '<S-Tab>', '<C-W>W', opts)
@@ -63,11 +65,9 @@ map('n', 'g*', [[:let @/ = expand('<cword>')<CR>:set hlsearch<CR>:call histadd("
 -- バッファ同士でDiff
 map('n', '<F10>', [[:execute('if &diff | diffoff! | else | diffthis | endif')<CR>]], opts)
 -- If there are multiple declaration sources in tag jump, select from the list
-map('n', 't', [[:exe("tjump ".expand('<cword>'))<CR>]], opts)
-map('v', 't', [[zygv<ESC><ESC>:exe("tjump ".@z)<CR>]], opts)
+map('n', 't', 'g<C-]>', opts)
+map('v', 't', [["zygv<ESC><ESC>:exe("tjump ".@z)<CR>]], opts)
 -- Back tag jamp
 map('n', 'T', '<C-t>', opts)
 -- QuickFixウィンドウの表示/非表示
 map('n', '<leader>q', [[:exe('let nr = winnr("$") | copen | if nr == winnr("$") | cclose \| else | set modifiable | endif')<CR>]], opts)
-
-

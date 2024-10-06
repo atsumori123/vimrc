@@ -8,22 +8,19 @@ local VimPluginsPath = vim.env.HOME..sep..'vimplugins'
 ----------------------------------------
 VimPlugins = {
 			'vim-lucius',
-			'taglist.vim',
-			'stline.vim',
 			'gr.vim',
 			'cmemo.vim',
 			'oldfiles.vim',
 			'buffer.vim',
 			'minfy.vim',
+			'stline.vim',
 			'vim-easymotion',
-			'vim-fugitive',
 			'vim-visual-star-search',
 			'diffview.nvim',
 			'Comment.nvim',
+			'toggleterm.nvim',
+			'gitsigns.nvim',
 }
---			'ddc-around',
---			'ddc-matcher_head',
---			'ddc.vim',
 
 local function Enabled(plugin)
 	for k, v in pairs(VimPlugins) do
@@ -39,11 +36,7 @@ local function load_config()
 	-- jonathanfilip/vim-lucius
 	if Enabled('vim-lucius') then
 		vim.cmd('colorscheme lucius')
-	end
-
-	-- cocopon/iceberg.vim
-	if Enabled('iceberg.vim') then
-		vim.cmd('colorscheme iceberg')
+		vim.cmd('highlight Search ctermbg=222 ctermfg=0 guibg=moccasin guifg=#484848')
 	end
 
 	-- vim-scripts/taglist.vim
@@ -72,7 +65,7 @@ local function load_config()
 	-- atsumori123/gr.vim
 	if Enabled('gr.vim') then
 		map('', '<leader>g', ':Gr<CR>', opts)
-		vim.g.GR_Grep_Proc = 'vim'
+		vim.g.GR_GrepCommand = 'vim'
 	end
 
 	-- atsumori123/cmemo.vim
@@ -115,16 +108,38 @@ local function load_config()
 
 	-- sindrets/diffview.nvim
 	if Enabled('diffview.nvim') then
-		map('n', '<F7>', ':DiffviewOpen<CR>', opts)
-		map('n', '<F8>', ':DiffviewFileHistory<CR>', opts)
-		map('n', '<F9>', ':DiffviewClose<CR>', opts)
+		require("diffview").setup({
+			use_icons = false,
+		})
+		local diffview_func = function()
+			local mode = vim.fn.input("1:Changes, 2:File history, 3:Close : ")
+			if	   mode == "1" then vim.cmd('DiffviewOpen')
+			elseif mode == "2" then vim.cmd('DiffviewFileHistory')
+			elseif mode == "3" then vim.cmd('DiffviewClose')
+			end
+			vim.cmd('echo "\r"')
+		end
+		vim.keymap.set('n', '<F9>', function() diffview_func() end)
 	end
 
 	-- numToStr/Comment.nvim
 	if Enabled('Comment.nvim') then
 		require('Comment').setup()
-    	-- Toggle in VISUAL mode
-	    vim.keymap.set('x', '<leader>c', '<Plug>(comment_toggle_linewise_visual)')
+  		map('n', '<leader>c', '<Plug>(comment_toggle_linewise_current)', opts)
+	    map('x', '<leader>c', '<Plug>(comment_toggle_linewise_visual)', opts)
+	end
+
+	-- akinsho/toggleterm.nvim
+	if Enabled('toggleterm.nvim') then
+		require('toggleterm').setup{
+			open_mapping = [[<c-\>]],
+			direction = 'float',
+		}
+	end
+
+	-- lewis6991/gitsigns.nvim
+	if Enabled('gitsigns.nvim') then
+    	require('gitsigns').setup()
 	end
 
 	-- test
@@ -146,7 +161,9 @@ end
 ----------------------------------------
 for k, plugin in pairs(VimPlugins) do
 	local path = VimPluginsPath .. sep .. plugin
-	vim.fn.execute('set runtimepath+=' .. path)
+	if vim.fn.isdirectory(path) then
+		vim.fn.execute('set runtimepath+=' .. path)
+	end
 end
 load_config()
 

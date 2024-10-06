@@ -15,6 +15,7 @@ let s:VimPlugins = [
 			\ 'vim-easymotion',
 			\ 'vim-fugitive',
 			\ 'vim-visual-star-search',
+			\ 'vimdoc-ja',
 			\ ]
 "			\ 'ddc-around',
 "			\ 'ddc-matcher_head',
@@ -136,7 +137,9 @@ endfunction
 "***************************************
 for plugin in s:VimPlugins
 	let path = s:VimPluginsPath . '/' . plugin
-	exec 'set runtimepath+=' . path
+	if isdirectory(path)
+		exec 'set runtimepath+=' . path
+	endif
 endfor
 call s:load_config()
 

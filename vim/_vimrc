@@ -90,7 +90,7 @@ set backspace=indent,eol,start
 " keymap
 "--------------------------------
 " カーソル後ろにペースト後、カーソルをペースト開始時の位置に戻す
-noremap \ P`[
+noremap <leader>p P`[
 " INSERTモード中のカーソル移動
 inoremap <c-b> <Left>
 inoremap <c-j> <Down>
@@ -117,8 +117,9 @@ noremap <S-l> $
 " redo
 nnoremap U <C-r>
 " 最後に編集した箇所に移動
-noremap <END> '.
-noremap <kEND> '.
+noremap <leader>e `.
+" 次のジャンプ箇所へ移動
+noremap <C-l> <C-i>
 " Tabキーでウィンドウ切り替え
 noremap <Tab> <C-W>w
 noremap <S-Tab> <C-W>W
@@ -143,7 +144,7 @@ nnoremap <leader>a ggVG
 nnoremap <C-j> ]c
 nnoremap <C-k> [c
 " If there are multiple declaration sources in tag jump, select from the list
-nnoremap t :exe("tjump ".expand('<cword>'))<CR>
+nnoremap t g<c-]>
 vnoremap t "zygv<ESC><ESC>:exe("tjump ".@z)<CR>
 " Back tag jamp
 nnoremap T <C-t>
