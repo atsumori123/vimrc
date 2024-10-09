@@ -20,6 +20,9 @@ VimPlugins = {
 			'Comment.nvim',
 			'toggleterm.nvim',
 			'gitsigns.nvim',
+			'outline.nvim',
+			'nvim-lspconfig',
+			'mason.nvim',
 }
 
 local function Enabled(plugin)
@@ -70,7 +73,7 @@ local function load_config()
 
 	-- atsumori123/cmemo.vim
 	if Enabled('cmemo.vim') then
-		map('n', '<leader>t', ':CMemo<CR>', opts)
+		map('', '<leader>t', ':CMemo<CR>', opts)
 	end
 
 	-- atsumori123/oldfiles.vim
@@ -80,12 +83,13 @@ local function load_config()
 
 	-- atsumori123/buffer.vim
 	if Enabled('buffer.vim') then
-		map('n', '<leader>b', ':BF b<CR>', opts)
-		map('n', '<leader>m', ':BF m<CR>', opts)
-		map('n', '<leader>x', ':BF c<CR>', opts)
-		map('n', '<S-j>', ':BN<CR>', opts)
-		map('n', '<S-k>', ':BP<CR>', opts)
-		map('n', 'zc', ':ZC<CR>', opts)
+		map('n', '<leader>b', '<Plug>BFTools.Buffers<CR>', opts)
+		map('n', '<leader>m', '<Plug>BFTools.Marks<CR>', opts)
+		map('n', '<leader>x', '<Plug>BFTools.Close<CR>', opts)
+		map('n', '<S-j>', '<Plug>BFTools.Next<CR>', opts)
+		map('n', '<S-k>', '<Plug>BFTools.Prev<CR>', opts)
+		map('n', '<C-p>', '<Plug>BFTools.Preview<CR>', opts)
+		map('n', 'zc', '<Plug>BFTools.HrCenter<CR>', opts)
 		map('n', '<leader>r', ':Replace<CR>', opts)
 	end
 
@@ -139,7 +143,25 @@ local function load_config()
 
 	-- lewis6991/gitsigns.nvim
 	if Enabled('gitsigns.nvim') then
-    	require('gitsigns').setup()
+		require('gitsigns').setup()
+	end
+
+	-- hedyhli/outline.nvim
+	if Enabled('outline.nvim') then
+		require('outline').setup()
+		map('n', '<F11>', ':Outline<CR>', opts)
+	end
+
+	-- williamboman/mason.nvim
+	if Enabled('mason.nvim') then
+		require("mason").setup()
+	end
+
+	-- neovim/nvim-lspconfig
+	if Enabled('nvim-lspconfig') then
+		local lspconfig = require("lspconfig")
+		lspconfig.clangd.setup({})
+		vim.diagnostic.disable()
 	end
 
 	-- test

@@ -70,4 +70,4 @@ map('v', 't', [["zygv<ESC><ESC>:exe("tjump ".@z)<CR>]], opts)
 -- Back tag jamp
 map('n', 'T', '<C-t>', opts)
 -- QuickFixウィンドウの表示/非表示
-map('n', '<leader>q', [[:exe('let nr = winnr("$") | copen | if nr == winnr("$") | cclose \| else | set modifiable | endif')<CR>]], opts)
+map('n', '<leader>q', [[:exe('let nr = winnr("$") | copen | if nr == winnr("$") | cclose | else | set modifiable | endif')<CR>]], opts)

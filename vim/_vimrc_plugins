@@ -92,13 +92,14 @@ function! s:load_config() abort
 
 	" atsumori123/buffer.vim
 	if s:Enabled('buffer.vim')
-		nnoremap <leader>b :BF b<CR>
-		nnoremap <leader>m :BF m<CR>
-		nnoremap <leader>x :BF c<CR>
-		nnoremap <silent><S-j> :BN<CR>
-		nnoremap <silent><S-k> :BP<CR>
-		nnoremap <silent>zc :ZC<CR>
-		noremap <silent><leader>r :Replace<CR>
+		nnoremap <leader>b <Plug>BFTools.Buffers<CR>
+		nnoremap <leader>m <Plug>BFTools.Marks<CR>
+		nnoremap <leader>x <Plug>BFTools.Close<CR>
+		nnoremap <S-j> <Plug>BFTools.Next<CR>
+		nnoremap <S-k> <Plug>BFTools.Prev<CR>
+		nnoremap <C-p> <Plug>BFTools.Preview<CR>
+		nnoremap zc <Plug>BFTools.HrCenter<CR>
+		nnoremap <leader>r Replace<CR>
 	endif
 
 	" atsumori123/minfy.vim
