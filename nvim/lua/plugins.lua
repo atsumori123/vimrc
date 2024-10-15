@@ -10,7 +10,7 @@ VimPlugins = {
 			'vim-lucius',
 			'gr.vim',
 			'cmemo.vim',
-			'oldfiles.vim',
+			'oldfiles.nvim',
 			'buffer.vim',
 			'minfy.vim',
 			'stline.vim',
@@ -68,7 +68,7 @@ local function load_config()
 	-- atsumori123/gr.vim
 	if Enabled('gr.vim') then
 		map('', '<leader>g', ':Gr<CR>', opts)
-		vim.g.GR_GrepCommand = 'vim'
+		vim.g.GR_GrepCommand = 'ripgrep'
 	end
 
 	-- atsumori123/cmemo.vim
@@ -76,9 +76,10 @@ local function load_config()
 		map('', '<leader>t', ':CMemo<CR>', opts)
 	end
 
-	-- atsumori123/oldfiles.vim
-	if Enabled('oldfiles.vim') then
-		map('n', '<leader>l', ':OL<CR>', opts)
+	-- atsumori123/oldfiles.nvim
+	if Enabled('oldfiles.nvim') then
+		require('oldfiles').setup()
+		map('n', '<leader>l', ':OldFiles<CR>', opts)
 	end
 
 	-- atsumori123/buffer.vim
@@ -91,6 +92,7 @@ local function load_config()
 		map('n', '<C-p>', '<Plug>BFTools.Preview<CR>', opts)
 		map('n', 'zc', '<Plug>BFTools.HrCenter<CR>', opts)
 		map('n', '<leader>r', ':Replace<CR>', opts)
+		map('x', '<leader>r', ':Replace<CR>', opts)
 	end
 
 	-- atsumori123/minfy.vim
@@ -165,7 +167,7 @@ local function load_config()
 	end
 
 	-- test
-	map('n', '<leader>[', ':source ~/vimfiles/script/test.vim<CR>', opts)
+--	map('n', '<leader>[', ':source ~/vimfiles/script/test.vim<CR>', opts)
 end
 
 ----------------------------------------

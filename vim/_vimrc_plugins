@@ -82,7 +82,7 @@ function! s:load_config() abort
 
 	" atsumori123/cmemo.vim
 	if s:Enabled('cmemo.vim')
-		nnoremap <leader>t :CMemo<CR>
+		noremap <leader>t :CMemo<CR>
 	endif
 
 	" atsumori123/oldfiles.vim
@@ -99,7 +99,7 @@ function! s:load_config() abort
 		nnoremap <S-k> <Plug>BFTools.Prev<CR>
 		nnoremap <C-p> <Plug>BFTools.Preview<CR>
 		nnoremap zc <Plug>BFTools.HrCenter<CR>
-		nnoremap <leader>r Replace<CR>
+		noremap <leader>r :Replace<CR>
 	endif
 
 	" atsumori123/minfy.vim
