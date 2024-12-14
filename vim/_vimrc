@@ -6,6 +6,7 @@ source $HOME/_vimrc_plugins
 filetype plugin indent on
 syntax enable
 
+set termguicolors
 "--------------------------------
 " base configure
 "--------------------------------
@@ -85,6 +86,8 @@ set diffopt+=vertical
 set clipboard+=unnamed
 " インサートモード中の BS、CTRL-W、CTRL-U による文字削除を柔軟にする
 set backspace=indent,eol,start
+" ビープ音を消す
+set belloff=all
 
 "--------------------------------
 " keymap

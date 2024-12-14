@@ -32,6 +32,7 @@ function! s:load_config() abort
 	" jonathanfilip/vim-lucius
 	if s:Enabled('vim-lucius')
 		colorscheme lucius
+		let g:lucius_style = 'dark'
 	endif
 
 	" cocopon/iceberg.vim
@@ -77,7 +78,7 @@ function! s:load_config() abort
 	" atsumori123/gr.vim
 	if s:Enabled('gr.vim')
 		noremap <silent><leader>g :Gr<CR>
-		let GR_Grep_Proc = 'vim'
+		let g:GR_GrepCommand = 'vimgrep'
 	endif
 
 	" atsumori123/cmemo.vim
