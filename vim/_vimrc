@@ -162,6 +162,6 @@ noremap <Esc><Esc> :nohlsearch<CR><Esc>
 nnoremap <silent> * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call histadd("/", '\<'.@z.'\>')<CR>
 nnoremap <silent> g* "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:call histadd("/", @z)<CR>
 " QuickFixウィンドウの表示/非表示
-nnoremap <silent><leader>q :execute('let nr = winnr("$") \| copen \| if nr == winnr("$") \| cclose \| else \| set modifiable \| endif')<CR>
+nnoremap <silent><leader>q :execute('let nr = winnr("$") \| copen \| if nr == winnr("$") \| exe "wincmd p" \| cclose \| else \| set modifiable \| endif')<CR>
 " Open QuickFix window under vertical split
 autocmd Filetype qf wincmd J
