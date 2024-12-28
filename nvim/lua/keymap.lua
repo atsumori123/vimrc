@@ -61,6 +61,7 @@ map('n', '<C-UP>', [[:let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)+1'
 map('n', '<C-DOWN>', [[:let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)-1','')<CR>]], bufopts)
 -- 検索開始でカーソルを次の候補に移動させない
 map('n', '*', [[:let @/ = '\<' . expand('<cword>') . '\>'<CR>:set hlsearch<CR>:call histadd("/", @/)<CR>]], bufopts)
+map('v', '*', [["zygv<ESC>:let @/ = @z<CR>:set hlsearch<CR>:call histadd("/", @/)<CR>]], bufopts)
 map('n', 'g*', [[:let @/ = expand('<cword>')<CR>:set hlsearch<CR>:call histadd("/", @/)<CR>]], bufopts)
 -- バッファ同士でDiff
 map('n', '<F10>', [[:execute('if &diff | diffoff! | else | diffthis | endif')<CR>]], opts)

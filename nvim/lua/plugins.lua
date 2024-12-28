@@ -15,7 +15,6 @@ VimPlugins = {
 			'minfy.vim',
 			'stline.vim',
 			'vim-easymotion',
-			'vim-visual-star-search',
 			'diffview.nvim',
 			'Comment.nvim',
 			'toggleterm.nvim',

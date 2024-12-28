@@ -14,7 +14,6 @@ let s:VimPlugins = [
 			\ 'minfy.vim',
 			\ 'vim-easymotion',
 			\ 'vim-fugitive',
-			\ 'vim-visual-star-search',
 			\ 'vimdoc-ja',
 			\ ]
 "			\ 'ddc-around',
