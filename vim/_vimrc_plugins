@@ -5,16 +5,13 @@ let s:VimPluginsPath = $HOME . '/vimplugins'
 "***************************************
 let s:VimPlugins = [
 			\ 'vim-lucius',
-			\ 'taglist.vim',
 			\ 'stline.vim',
 			\ 'gr.vim',
-			\ 'cmemo.vim',
 			\ 'oldfiles.vim',
-			\ 'buffer.vim',
 			\ 'minfy.vim',
 			\ 'vim-easymotion',
-			\ 'vim-fugitive',
 			\ 'vimdoc-ja',
+			\ 'various.vim',
 			\ ]
 "			\ 'ddc-around',
 "			\ 'ddc-matcher_head',
@@ -80,26 +77,9 @@ function! s:load_config() abort
 		let g:GR_GrepCommand = 'vimgrep'
 	endif
 
-	" atsumori123/cmemo.vim
-	if s:Enabled('cmemo.vim')
-		noremap <leader>t :CMemo<CR>
-	endif
-
 	" atsumori123/oldfiles.vim
 	if s:Enabled('oldfiles.vim')
 		nnoremap <leader>l :OL<CR>
-	endif
-
-	" atsumori123/buffer.vim
-	if s:Enabled('buffer.vim')
-		nnoremap <leader>b <Plug>BFTools.Buffers<CR>
-		nnoremap <leader>m <Plug>BFTools.Marks<CR>
-		nnoremap <leader>x <Plug>BFTools.Close<CR>
-		nnoremap <S-j> <Plug>BFTools.Next<CR>
-		nnoremap <S-k> <Plug>BFTools.Prev<CR>
-		nnoremap <C-p> <Plug>BFTools.Preview<CR>
-		nnoremap zc <Plug>BFTools.HrCenter<CR>
-		noremap <leader>r :Replace<CR>
 	endif
 
 	" atsumori123/minfy.vim
@@ -117,6 +97,19 @@ function! s:load_config() abort
 		let g:EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
 		nmap f <Plug>(easymotion-bd-f)
 		nmap F <Plug>(easymotion-overwin-f)
+	endif
+
+	if s:Enabled('various.vim')
+		nnoremap <leader>b <Plug>(various-buffers)<CR>
+		nnoremap <leader>m <Plug>(various-marks)<CR>
+		nnoremap <S-j> <Plug>(various-next-buffer)<CR>
+		nnoremap <S-k> <Plug>(various-prev-buffer)<CR>
+		nnoremap <leader>x <Plug>(various-close)<CR>
+		nnoremap <C-p> <Plug>(various-preview)<CR>
+		nnoremap <leader>q <Plug>(various-quickfix)<CR>
+		nnoremap zc <Plug>(various-display-in-center)<CR>
+		noremap <leader>r :Replace<CR>
+		noremap <leader>t :Tips<CR>
 	endif
 
 	" test

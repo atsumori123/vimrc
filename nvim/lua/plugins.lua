@@ -9,11 +9,10 @@ local VimPluginsPath = vim.env.HOME..sep..'vimplugins'
 VimPlugins = {
 			'vim-lucius',
 			'gr.vim',
-			'cmemo.vim',
 			'oldfiles.nvim',
-			'buffer.vim',
 			'minfy.vim',
 			'stline.vim',
+			'various.vim',
 			'vim-easymotion',
 			'diffview.nvim',
 			'Comment.nvim',
@@ -81,17 +80,18 @@ local function load_config()
 		map('n', '<leader>l', ':OldFiles<CR>', opts)
 	end
 
-	-- atsumori123/buffer.vim
-	if Enabled('buffer.vim') then
-		map('n', '<leader>b', '<Plug>BFTools.Buffers<CR>', opts)
-		map('n', '<leader>m', '<Plug>BFTools.Marks<CR>', opts)
-		map('n', '<leader>x', '<Plug>BFTools.Close<CR>', opts)
-		map('n', '<S-j>', '<Plug>BFTools.Next<CR>', opts)
-		map('n', '<S-k>', '<Plug>BFTools.Prev<CR>', opts)
-		map('n', '<C-p>', '<Plug>BFTools.Preview<CR>', opts)
-		map('n', 'zc', '<Plug>BFTools.HrCenter<CR>', opts)
-		map('n', '<leader>r', ':Replace<CR>', opts)
-		map('x', '<leader>r', ':Replace<CR>', opts)
+	-- atsumori123/various.vim
+	if Enabled('various.vim') then
+		map('n', '<leader>b', '<Plug>(various-buffer)<CR>', opts)
+		map('n', '<leader>m', '<Plug>(various-marks)<CR>', opts)
+		map('n', '<S-j>', '<Plug>(various-next-buffer)<CR>', opts)
+		map('n', '<S-k>', '<Plug>(various-prev-buffer)<CR>', opts)
+		map('n', '<leader>x', '<Plug>(various-close)<CR>', opts)
+		map('n', '<C-p>', '<Plug>(various-preview)<CR>', opts)
+		map('n', '<leader>q', '<Plug>(various-quickfix)<CR>', opts)
+		map('n', 'zc', '<Plug>(various-display-in-center)<CR>', opts)
+		map('', '<leader>r', ':Replace<CR>', opts)
+		map('', '<leader>t', ':Tips<CR>', opts)
 	end
 
 	-- atsumori123/minfy.vim
