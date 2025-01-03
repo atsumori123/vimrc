@@ -108,6 +108,8 @@ function! s:load_config() abort
 		nnoremap <C-p> <Plug>(various-preview)<CR>
 		nnoremap <leader>q <Plug>(various-quickfix)<CR>
 		nnoremap zc <Plug>(various-display-in-center)<CR>
+		nnoremap <C-t> <Plug>(various-toggle-terminal)<CR>
+		tnoremap <C-t> <Plug>(various-toggle-terminal)<CR>
 		noremap <leader>r :Replace<CR>
 		noremap <leader>t :Tips<CR>
 	endif
