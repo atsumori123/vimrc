@@ -8,26 +8,26 @@ plugindir="$HOME/vimplugins"
 #---------------------------------------
 # Define plugins
 #---------------------------------------
-plugins=(
-	"jonathanfilip/vim-lucius"
-	"easymotion/vim-easymotion"
-	"numToStr/Comment.nvim"
-	"sindrets/diffview.nvim"
-	"akinsho/toggleterm.nvim"
-	"lewis6991/gitsigns.nvim"
-	"hedyhli/outline.nvim"
-	"vim-jp/vimdoc-ja"
-	"atsumori123/stline.vim"
-	"atsumori123/gr.vim"
-	"atsumori123/oldfiles.vim"
-	"atsumori123/various.vim"
-	"atsumori123/minfy.vim"
-	"atsumori123/oldfiles.nvim"
-	"atsumori123/various.nvim"
-	"neovim/nvim-lspconfig"
-	"williamboman/mason.nvim"
-	"williamboman/mason-lspconfig.nvim"
-)
+plugins=()
+	plugins+=("jonathanfilip/vim-lucius")
+	plugins+=("easymotion/vim-easymotion")
+	plugins+=("numToStr/Comment.nvim")
+	plugins+=("sindrets/diffview.nvim")
+	plugins+=("akinsho/toggleterm.nvim")
+	plugins+=("lewis6991/gitsigns.nvim")
+	plugins+=("hedyhli/outline.nvim")
+	plugins+=("vim-jp/vimdoc-ja")
+	plugins+=("atsumori123/stline.vim")
+	plugins+=("atsumori123/gr.vim")
+	plugins+=("atsumori123/oldfiles.vim")
+	plugins+=("atsumori123/various.vim")
+	plugins+=("atsumori123/minfy.vim")
+	plugins+=("atsumori123/oldfiles.nvim")
+	plugins+=("atsumori123/various.nvim")
+	plugins+=("neovim/nvim-lspconfig")
+	plugins+=("williamboman/mason.nvim")
+	plugins+=("williamboman/mason-lspconfig.nvim")
+	plugins+=("tpope/vim-fugitive")
 
 #---------------------------------------
 # Script

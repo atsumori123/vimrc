@@ -1,25 +1,29 @@
 let s:VimPluginsPath = $HOME . '/vimplugins'
+let s:VimPlugins = []
 
-"***************************************
-" Define load plugin
-"***************************************
-let s:VimPlugins = [
-			\ 'vim-lucius',
-			\ 'stline.vim',
-			\ 'gr.vim',
-			\ 'oldfiles.vim',
-			\ 'minfy.vim',
-			\ 'vim-easymotion',
-			\ 'vimdoc-ja',
-			\ 'various.vim',
-			\ ]
-"			\ 'ddc-around',
-"			\ 'ddc-matcher_head',
-"			\ 'ddc.vim',
+function! s:plug(plugin) abort
+	call add(s:VimPlugins, a:plugin)
+endfunction
 
 function! s:Enabled(plugin) abort
 	return index(s:VimPlugins, a:plugin) != -1 ? 1 : 0
 endfunction
+
+"***************************************
+" Define load plugin
+"***************************************
+call s:plug('vim-lucius')
+call s:plug('stline.vim')
+call s:plug('gr.vim')
+call s:plug('oldfiles.vim')
+call s:plug('minfy.vim')
+call s:plug('vim-easymotion')
+call s:plug('vimdoc-ja')
+call s:plug('various.vim')
+call s:plug('vim-fugitive')
+"call s:plug('ddc-around')
+"call s:plug('ddc-matcher_head')
+"call s:plug('ddc.vim')
 
 "***************************************
 " Define plugin loading configuration
@@ -29,19 +33,6 @@ function! s:load_config() abort
 	if s:Enabled('vim-lucius')
 		colorscheme lucius
 		let g:lucius_style = 'dark'
-	endif
-
-	" cocopon/iceberg.vim
-	if s:Enabled('iceberg.vim')
-		colorscheme iceberg
-	endif
-
-	" vim-scripts/taglist.vim
-	if s:Enabled('taglist.vim')
-		let Tlist_GainFocus_On_ToggleOpen = 1	" When you open the tag list, focus on the tag list
-		let Tlist_File_Fold_Auto_Close = 1		" Automatically close tag list when file is inactive
-		let Tlist_Show_One_File = 1				" Show only the tags of the source you are currently editing
-		nnoremap <F11> :TlistToggle<CR>
 	endif
 
 	" Shougo/ddc.vim
@@ -84,8 +75,7 @@ function! s:load_config() abort
 
 	" atsumori123/minfy.vim
 	if s:Enabled('minfy.vim')
-		nnoremap <silent><c-e> :execute "Minfy ".expand("%:p:h")<CR>
-		let Minfy_use_easymotion = 0
+		nnoremap <silent><c-o> :execute "Minfy ".expand("%:p:h")<CR>
 	endif
 
 	"easymotion/vim-easymotion
@@ -96,9 +86,9 @@ function! s:load_config() abort
 		let g:EasyMotion_use_upper = 1
 		let g:EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
 		nmap f <Plug>(easymotion-bd-f)
-		nmap F <Plug>(easymotion-overwin-f)
 	endif
 
+	" atsumori123/various.vim
 	if s:Enabled('various.vim')
 		nnoremap <leader>b <Plug>(various-buffers)<CR>
 		nnoremap <leader>m <Plug>(various-marks)<CR>

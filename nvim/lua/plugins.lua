@@ -2,26 +2,11 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local sep = vim.fn.execute('echo has("unix")') and '/' or '\\'
 local VimPluginsPath = vim.env.HOME..sep..'vimplugins'
+local VimPlugins = {}
 
-----------------------------------------
--- Define load plugin
-----------------------------------------
-VimPlugins = {
-			'vim-lucius',
-			'gr.vim',
-			'oldfiles.nvim',
-			'minfy.vim',
-			'stline.vim',
-			'various.vim',
-			'vim-easymotion',
-			'diffview.nvim',
-			'Comment.nvim',
-			'toggleterm.nvim',
-			'gitsigns.nvim',
-			'outline.nvim',
-			'nvim-lspconfig',
-			'mason.nvim',
-}
+local function plug(plugin)
+	table.insert(VimPlugins, plugin)
+end
 
 local function Enabled(plugin)
 	for k, v in pairs(VimPlugins) do
@@ -29,6 +14,24 @@ local function Enabled(plugin)
 	end
 	return false
 end
+
+----------------------------------------
+-- Define load plugin
+----------------------------------------
+plug('vim-lucius')
+plug('gr.vim')
+plug('oldfiles.nvim')
+plug('minfy.vim')
+plug('stline.vim')
+plug('various.vim')
+plug('vim-easymotion')
+plug('diffview.nvim')
+plug('Comment.nvim')
+plug('toggleterm.nvim')
+plug('gitsigns.nvim')
+plug('outline.nvim')
+plug('nvim-lspconfig')
+plug('mason.nvim')
 
 ----------------------------------------
 -- Define plugin loading configuration
@@ -69,11 +72,6 @@ local function load_config()
 		vim.g.GR_GrepCommand = 'ripgrep'
 	end
 
-	-- atsumori123/cmemo.vim
-	if Enabled('cmemo.vim') then
-		map('', '<leader>t', ':CMemo<CR>', opts)
-	end
-
 	-- atsumori123/oldfiles.nvim
 	if Enabled('oldfiles.nvim') then
 		require('oldfiles').setup()
@@ -90,14 +88,15 @@ local function load_config()
 		map('n', '<C-p>', '<Plug>(various-preview)<CR>', opts)
 		map('n', '<leader>q', '<Plug>(various-quickfix)<CR>', opts)
 		map('n', 'zc', '<Plug>(various-display-in-center)<CR>', opts)
+		map('n', '<C-t>', '<Plug>(various-toggle-terminal)<CR>', opts)
+		map('t', '<C-t>', '<Plug>(various-toggle-terminal)<CR>', opts)
 		map('', '<leader>r', ':Replace<CR>', opts)
 		map('', '<leader>t', ':Tips<CR>', opts)
 	end
 
 	-- atsumori123/minfy.vim
 	if Enabled('minfy.vim') then
-		map('n', '<c-e>', ':execute "Minfy ".expand("%:p:h")<CR>', opts)
-		vim.g.Minfy_use_easymotion = 0
+		map('n', '<c-o>', ':execute "Minfy ".expand("%:p:h")<CR>', opts)
 	end
 
 	-- vim-EasyMotionTarget
@@ -108,7 +107,6 @@ local function load_config()
 		vim.g.EasyMotion_use_upper = 1
 		vim.g.EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
 		map('n', 'f', '<Plug>(easymotion-bd-f)', opts)
-		map('n', 'F', '<Plug>(easymotion-overwin-f)', opts)
 	end
 
 	-- sindrets/diffview.nvim

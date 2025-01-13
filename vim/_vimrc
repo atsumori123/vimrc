@@ -135,6 +135,8 @@ inoremap <silent> jj <ESC>
 inoremap <C-j> <ESC>
 " インサートモードからノーマルモードに戻るときIMEをオフにする
 inoremap <ESC> <ESC>:set iminsert=0<CR>
+"autocmd InsertLeave * :call system("zenhan 0")
+"autocmd CmdlineLeave * :call system("zenhan 0")
 " 記録終了のキーマップを無効
 noremap q <nop>
 " キー操作記録開始
