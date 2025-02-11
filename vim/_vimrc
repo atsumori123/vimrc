@@ -1,12 +1,12 @@
 " Map leader
 let mapleader = "\<Space>"
+set termguicolors
 " Plugins/Scripts
 source $HOME/_vimrc_plugins
 
 filetype plugin indent on
 syntax enable
 
-set termguicolors
 "--------------------------------
 " base configure
 "--------------------------------
@@ -166,3 +166,6 @@ vnoremap <silent> * "zygv<ESC>:let @/ = @z<CR>:set hlsearch<CR>:call histadd("/"
 nnoremap <silent> g* "zyiw:let @/ = @z<CR>:set hlsearch<CR>:call histadd("/", @z)<CR>
 " Open QuickFix window under vertical split
 autocmd Filetype qf wincmd J
+
+"autocmd InsertLeave * :call system("zenhan 0")
+"autocmd CmdlineLeave * :call system("zenhan 0")

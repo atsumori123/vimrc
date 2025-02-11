@@ -21,6 +21,7 @@ call s:plug('vim-easymotion')
 call s:plug('vimdoc-ja')
 call s:plug('various.vim')
 call s:plug('vim-fugitive')
+"call s:plug('gruvbox')
 "call s:plug('ddc-around')
 "call s:plug('ddc-matcher_head')
 "call s:plug('ddc.vim')
@@ -33,6 +34,13 @@ function! s:load_config() abort
 	if s:Enabled('vim-lucius')
 		colorscheme lucius
 		let g:lucius_style = 'dark'
+	endif
+
+	" jonathanfilip/vim-lucius
+	if s:Enabled('gruvbox')
+		let g:gruvbox_bold=0
+"		set bg=dark
+		colorscheme gruvbox
 	endif
 
 	" Shougo/ddc.vim
@@ -75,7 +83,7 @@ function! s:load_config() abort
 
 	" atsumori123/minfy.vim
 	if s:Enabled('minfy.vim')
-		nnoremap <silent><c-o> :execute "Minfy ".expand("%:p:h")<CR>
+		nnoremap <silent>\ :execute "Minfy ".expand("%:p:h")<CR>
 	endif
 
 	"easymotion/vim-easymotion
