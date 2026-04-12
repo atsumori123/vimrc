@@ -10,21 +10,24 @@ function! s:Enabled(plugin) abort
 endfunction
 
 "***************************************
+" vim original plugin
+"***************************************
+packadd cfilter
+packadd matchit
+"packadd comment
+
+"***************************************
 " Define load plugin
 "***************************************
 call s:plug('vim-lucius')
 call s:plug('stline.vim')
 call s:plug('gr.vim')
-call s:plug('oldfiles.vim')
 call s:plug('minfy.vim')
 call s:plug('vim-easymotion')
 call s:plug('vimdoc-ja')
 call s:plug('various.vim')
-call s:plug('vim-fugitive')
-"call s:plug('gruvbox')
-"call s:plug('ddc-around')
-"call s:plug('ddc-matcher_head')
-"call s:plug('ddc.vim')
+call s:plug('unmemory.vim')
+call s:plug('oldfiles2.vim')
 
 "***************************************
 " Define plugin loading configuration
@@ -73,12 +76,7 @@ function! s:load_config() abort
 	" atsumori123/gr.vim
 	if s:Enabled('gr.vim')
 		noremap <silent><leader>g :Gr<CR>
-		let g:GR_GrepCommand = 'vimgrep'
-	endif
-
-	" atsumori123/oldfiles.vim
-	if s:Enabled('oldfiles.vim')
-		nnoremap <leader>l :OL<CR>
+		let g:GR_GrepCommand = 'grep'	" internal/grep/rg/git grep
 	endif
 
 	" atsumori123/minfy.vim
@@ -86,7 +84,7 @@ function! s:load_config() abort
 		nnoremap <silent>\ :execute "Minfy ".expand("%:p:h")<CR>
 	endif
 
-	"easymotion/vim-easymotion
+	" easymotion/vim-easymotion
 	if s:Enabled('vim-easymotion')
 		let g:EasyMotion_do_mapping = 0
 		let g:EasyMotion_smartcase = 1
@@ -98,18 +96,28 @@ function! s:load_config() abort
 
 	" atsumori123/various.vim
 	if s:Enabled('various.vim')
-		nnoremap <leader>b <Plug>(various-buffers)<CR>
-		nnoremap <leader>m <Plug>(various-marks)<CR>
-		nnoremap <S-j> <Plug>(various-next-buffer)<CR>
-		nnoremap <S-k> <Plug>(various-prev-buffer)<CR>
-		nnoremap <leader>x <Plug>(various-close)<CR>
-		nnoremap <C-p> <Plug>(various-preview)<CR>
-		nnoremap <leader>q <Plug>(various-quickfix)<CR>
-		nnoremap zc <Plug>(various-display-in-center)<CR>
-		nnoremap <C-t> <Plug>(various-toggle-terminal)<CR>
-		tnoremap <C-t> <Plug>(various-toggle-terminal)<CR>
+		nmap <leader>b <Plug>(various-buffers)<CR>
+		nmap <leader>m <Plug>(various-marks)<CR>
+		nmap <S-j> <Plug>(various-next-buffer)<CR>
+		nmap <S-k> <Plug>(various-prev-buffer)<CR>
+		nmap <leader>x <Plug>(various-close)<CR>
+		nmap <C-p> <Plug>(various-preview)<CR>
+		nmap q <Plug>(various-quickfix)<CR>
+		nmap zc <Plug>(various-display-in-center)<CR>
+		nmap <C-t> <Plug>(various-toggle-terminal)<CR>
+		tmap <C-t> <Plug>(various-toggle-terminal)<CR>
+		tmap <C-r> <Plug>(various-toggle-terminal-rotate)<CR>
 		noremap <leader>r :Replace<CR>
-		noremap <leader>t :Tips<CR>
+		let g:various_auto_complete = 0
+	endif
+
+	" atsumori123/unmemory.vim
+	if s:Enabled('unmemory.vim')
+		noremap <leader>t :Unmemory<CR>
+	endif
+
+	if s:Enabled('oldfiles2.vim')
+		nnoremap <leader>l :OL<CR>
 	endif
 
 	" test
