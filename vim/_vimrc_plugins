@@ -26,8 +26,8 @@ call s:plug('minfy.vim')
 call s:plug('vim-easymotion')
 call s:plug('vimdoc-ja')
 call s:plug('various.vim')
-call s:plug('unmemory.vim')
-call s:plug('oldfiles2.vim')
+call s:plug('unmemorable.vim')
+call s:plug('oldfiles.vim')
 
 "***************************************
 " Define plugin loading configuration
@@ -111,12 +111,12 @@ function! s:load_config() abort
 		let g:various_auto_complete = 0
 	endif
 
-	" atsumori123/unmemory.vim
-	if s:Enabled('unmemory.vim')
-		noremap <leader>t :Unmemory<CR>
+	" atsumori123/unmemorable.vim
+	if s:Enabled('unmemorable.vim')
+		noremap <leader>t :Unmemorable<CR>
 	endif
 
-	if s:Enabled('oldfiles2.vim')
+	if s:Enabled('oldfiles.vim')
 		nnoremap <leader>l :OL<CR>
 	endif
 
