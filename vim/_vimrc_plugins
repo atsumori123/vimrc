@@ -24,10 +24,10 @@ call s:plug('stline.vim')
 call s:plug('gr.vim')
 call s:plug('minfy.vim')
 call s:plug('vim-easymotion')
-call s:plug('vimdoc-ja')
 call s:plug('various.vim')
 call s:plug('unmemorable.vim')
 call s:plug('oldfiles.vim')
+"call s:plug('vim-oscyank')
 
 "***************************************
 " Define plugin loading configuration
@@ -103,7 +103,6 @@ function! s:load_config() abort
 		nmap <leader>x <Plug>(various-close)<CR>
 		nmap <C-p> <Plug>(various-preview)<CR>
 		nmap q <Plug>(various-quickfix)<CR>
-		nmap zc <Plug>(various-display-in-center)<CR>
 		nmap <C-t> <Plug>(various-toggle-terminal)<CR>
 		tmap <C-t> <Plug>(various-toggle-terminal)<CR>
 		tmap <C-r> <Plug>(various-toggle-terminal-rotate)<CR>
@@ -116,10 +115,18 @@ function! s:load_config() abort
 		noremap <leader>t :Unmemorable<CR>
 	endif
 
+	" atsumori123/oldfiles.vim
 	if s:Enabled('oldfiles.vim')
 		nnoremap <leader>l :OL<CR>
 	endif
 
+	" ojroques/vim-oscyank
+	if s:Enabled('vim-oscyank')
+  		autocmd TextYankPost *
+			\ if v:event.operator is 'y' && v:event.regname is '' |
+			\ execute 'OSCYankRegister "' |
+			\ endif
+	endif
 	" test
 	nnoremap <leader>[ :source ~/vimfiles/script/test.vim<CR>
 endfunction
