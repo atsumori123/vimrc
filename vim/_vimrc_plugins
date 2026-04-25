@@ -5,7 +5,7 @@ function! s:plug(plugin) abort
 	call add(s:VimPlugins, a:plugin)
 endfunction
 
-function! s:Enabled(plugin) abort
+function! s:IsEnable(plugin) abort
 	return index(s:VimPlugins, a:plugin) != -1 ? 1 : 0
 endfunction
 
@@ -27,27 +27,28 @@ call s:plug('vim-easymotion')
 call s:plug('various.vim')
 call s:plug('unmemorable.vim')
 call s:plug('oldfiles.vim')
-"call s:plug('vim-oscyank')
+call s:plug('glog.vim')
+call s:plug('vim-oscyank')
 
 "***************************************
 " Define plugin loading configuration
 "***************************************
 function! s:load_config() abort
 	" jonathanfilip/vim-lucius
-	if s:Enabled('vim-lucius')
+	if s:IsEnable('vim-lucius')
 		colorscheme lucius
 		let g:lucius_style = 'dark'
 	endif
 
 	" jonathanfilip/vim-lucius
-	if s:Enabled('gruvbox')
+	if s:IsEnable('gruvbox')
 		let g:gruvbox_bold=0
 "		set bg=dark
 		colorscheme gruvbox
 	endif
 
 	" Shougo/ddc.vim
-	if s:Enabled('ddc.vim')
+	if s:IsEnable('ddc.vim')
 		call ddc#custom#patch_global('sources', ['around'])
 		call ddc#custom#patch_global('sourceOptions', {
 			\ '_': {
@@ -59,7 +60,7 @@ function! s:load_config() abort
 	endif
 
 	" atsumori123/stline.vim
-	if s:Enabled('stline.vim')
+	if s:IsEnable('stline.vim')
 		let g:stline_theme = 'monochrome'
 		nmap <leader>1 <Plug>STLine.Go(1)
 		nmap <leader>2 <Plug>STLine.Go(2)
@@ -74,18 +75,18 @@ function! s:load_config() abort
 	endif
 
 	" atsumori123/gr.vim
-	if s:Enabled('gr.vim')
+	if s:IsEnable('gr.vim')
 		noremap <silent><leader>g :Gr<CR>
 		let g:GR_GrepCommand = 'grep'	" internal/grep/rg/git grep
 	endif
 
 	" atsumori123/minfy.vim
-	if s:Enabled('minfy.vim')
+	if s:IsEnable('minfy.vim')
 		nnoremap <silent>\ :execute "Minfy ".expand("%:p:h")<CR>
 	endif
 
 	" easymotion/vim-easymotion
-	if s:Enabled('vim-easymotion')
+	if s:IsEnable('vim-easymotion')
 		let g:EasyMotion_do_mapping = 0
 		let g:EasyMotion_smartcase = 1
 		let g:EasyMotion_use_migemo = 1
@@ -95,7 +96,7 @@ function! s:load_config() abort
 	endif
 
 	" atsumori123/various.vim
-	if s:Enabled('various.vim')
+	if s:IsEnable('various.vim')
 		nmap <leader>b <Plug>(various-buffers)<CR>
 		nmap <leader>m <Plug>(various-marks)<CR>
 		nmap <S-j> <Plug>(various-next-buffer)<CR>
@@ -111,22 +112,15 @@ function! s:load_config() abort
 	endif
 
 	" atsumori123/unmemorable.vim
-	if s:Enabled('unmemorable.vim')
+	if s:IsEnable('unmemorable.vim')
 		noremap <leader>t :Unmemorable<CR>
 	endif
 
 	" atsumori123/oldfiles.vim
-	if s:Enabled('oldfiles.vim')
+	if s:IsEnable('oldfiles.vim')
 		nnoremap <leader>l :OL<CR>
 	endif
 
-	" ojroques/vim-oscyank
-	if s:Enabled('vim-oscyank')
-  		autocmd TextYankPost *
-			\ if v:event.operator is 'y' && v:event.regname is '' |
-			\ execute 'OSCYankRegister "' |
-			\ endif
-	endif
 	" test
 	nnoremap <leader>[ :source ~/vimfiles/script/test.vim<CR>
 endfunction
@@ -136,7 +130,7 @@ endfunction
 "***************************************
 function! s:lazy_setup() abort
 	"easymotion/vim-easymotion
-	if s:Enabled('vim-easymotion')
+	if s:IsEnable('vim-easymotion')
 		highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
 	endif
 endfunction

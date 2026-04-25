@@ -7,9 +7,6 @@ source $HOME/_vimrc_plugins
 filetype plugin indent on
 syntax enable
 
-packadd cfilter
-packadd matchit
-
 "--------------------------------
 " base configure
 "--------------------------------
@@ -91,6 +88,10 @@ set clipboard+=unnamed
 set backspace=indent,eol,start
 " ビープ音を消す
 set belloff=all
+"垂直分割時に右側に開く
+set splitright
+ " 水平分割時に下側に開く
+set splitbelow
 
 "--------------------------------
 " keymap
