@@ -19,7 +19,8 @@ packadd matchit
 "***************************************
 " Define load plugin
 "***************************************
-call s:plug('vim-lucius')
+"call s:plug('vim-lucius')
+call s:plug('iceberg.vim')
 call s:plug('stline.vim')
 call s:plug('gr.vim')
 call s:plug('minfy.vim')
@@ -40,28 +41,16 @@ function! s:load_config() abort
 		let g:lucius_style = 'dark'
 	endif
 
-	" jonathanfilip/vim-lucius
-	if s:IsEnable('gruvbox')
-		let g:gruvbox_bold=0
-"		set bg=dark
-		colorscheme gruvbox
-	endif
-
-	" Shougo/ddc.vim
-	if s:IsEnable('ddc.vim')
-		call ddc#custom#patch_global('sources', ['around'])
-		call ddc#custom#patch_global('sourceOptions', {
-			\ '_': {
-			\     'matchers': ['matcher_head'],
-			\ }})
-		inoremap <silent><expr><Tab> pumvisible() ? '<C-n>' : '<Tab>'
-		inoremap <silent><expr><S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
-		call ddc#enable()
+	" cocoon/iceberg.vim
+	if s:IsEnable('iceberg.vim')
+		set termguicolors
+		set background=dark
+		colorscheme iceberg
 	endif
 
 	" atsumori123/stline.vim
 	if s:IsEnable('stline.vim')
-		let g:stline_theme = 'monochrome'
+		let g:stline_theme = 'iceberg'
 		nmap <leader>1 <Plug>STLine.Go(1)
 		nmap <leader>2 <Plug>STLine.Go(2)
 		nmap <leader>3 <Plug>STLine.Go(3)
