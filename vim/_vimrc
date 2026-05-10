@@ -1,6 +1,6 @@
 " Map leader
 let mapleader = "\<Space>"
-set termguicolors
+
 " Plugins/Scripts
 source $HOME/_vimrc_plugins
 
@@ -10,6 +10,8 @@ syntax enable
 "--------------------------------
 " base configure
 "--------------------------------
+" GUIカラーを使用する
+set termguicolors
 " UTF-8化
 set fenc=utf-8
 " Automatic Character Encording
@@ -90,8 +92,10 @@ set backspace=indent,eol,start
 set belloff=all
 "垂直分割時に右側に開く
 set splitright
- " 水平分割時に下側に開く
+" 水平分割時に下側に開く
 set splitbelow
+" マクロ実行中やカーソル移動の再描画を抑制してパフォーマンスを上げる
+set lazyredraw
 
 "--------------------------------
 " keymap
@@ -99,10 +103,10 @@ set splitbelow
 " カーソル後ろにペースト後、カーソルをペースト開始時の位置に戻す
 noremap <leader>p P`[
 " INSERTモード中のカーソル移動
-inoremap <c-b> <Left>
 inoremap <c-j> <Down>
 inoremap <c-k> <Up>
 inoremap <c-l> <Right>
+inoremap <c-h> <LEFT>
 " 削除のみ
 vnoremap d "_d
 nnoremap d "_d
@@ -136,8 +140,7 @@ nnoremap <CR> i<CR><ESC>
 noremap <BS> i<BS><ESC>l
 " jj = <ESC>
 inoremap <silent> jj <ESC>
-inoremap <C-j> <ESC>
-" インサートモードからノーマルモードに戻るときIMEをオフにする
+" insertモードからnormalモードに戻るときIMEをオフにする
 inoremap <ESC> <ESC>:set iminsert=0<CR>
 " 記録終了のキーマップを無効
 "noremap q <nop>
@@ -168,6 +171,6 @@ vnoremap <silent> * "zygv<ESC>:let @/ = @z<CR>:set hlsearch<CR>:call histadd("/"
 nnoremap <silent> g* "zyiw:let @/ = @z<CR>:set hlsearch<CR>:call histadd("/", @z)<CR>
 " Open QuickFix window under vertical split
 autocmd Filetype qf wincmd J
-
+" zenhanによるinsertモードからnormalモードに戻るときIMEをオフにする
 "autocmd InsertLeave * :call system("zenhan 0")
 "autocmd CmdlineLeave * :call system("zenhan 0")
