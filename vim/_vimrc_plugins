@@ -27,12 +27,13 @@ call s:plug('stline.vim')
 call s:plug('gr.vim')
 call s:plug('minfy.vim')
 call s:plug('vim-easymotion')
-call s:plug('various.vim')
+call s:plug('winbuf.vim')
 call s:plug('unmemorable.vim')
 call s:plug('oldfiles.vim')
 call s:plug('glog.vim')
 call s:plug('vim-oscyank')
-"call s:plug('tagbar')
+call s:plug('tagbar')
+call s:plug('popupmarks.vim')
 
 "***************************************
 " Define plugin loading configuration
@@ -88,20 +89,20 @@ function! s:load_config() abort
 		nmap f <Plug>(easymotion-bd-f)
 	endif
 
-	" atsumori123/various.vim
-	if s:IsEnable('various.vim')
-		nmap <leader>b <Plug>(various-buffers)<CR>
-		nmap <leader>m <Plug>(various-marks)<CR>
-		nmap <S-j> <Plug>(various-next-buffer)<CR>
-		nmap <S-k> <Plug>(various-prev-buffer)<CR>
-		nmap <leader>x <Plug>(various-close)<CR>
-		nmap <C-p> <Plug>(various-preview)<CR>
-		nmap q <Plug>(various-quickfix)<CR>
-		nmap <C-t> <Plug>(various-toggle-terminal)<CR>
-		tmap <C-t> <Plug>(various-toggle-terminal)<CR>
-		tmap <C-r> <Plug>(various-toggle-terminal-rotate)<CR>
-		noremap <leader>r :Replace<CR>
-		let g:various_auto_complete = 0
+	" atsumori123/winbuf.vim
+	if s:IsEnable('winbuf.vim')
+		nmap <leader>b <Plug>(wb-buffer-list)<CR>
+		nmap <leader>x <Plug>(wb-buffer-close)<CR>
+		nmap <S-j> <Plug>(wb-next-buffer)<CR>
+		nmap <S-k> <Plug>(wb-prev-buffer)<CR>
+		nmap <TAB> <Plug>(wb-next-window)<CR>
+		nmap <S-TAB> <Plug>(wb-prev-window)<CR>
+		nmap <C-t> <Plug>(wb-toggle-terminal)<CR>
+		tmap <C-t> <Plug>(wb-toggle-terminal)<CR>
+		tmap <C-r> <Plug>(wb-rotate-terminal)<CR>
+		nmap <C-p> <Plug>(wb-toggle-preview)<CR>
+		nmap q <Plug>(wb-toggle-quickfix)<CR>
+		let g:switch_all_window = 1
 	endif
 
 	" atsumori123/unmemorable.vim
@@ -114,6 +115,12 @@ function! s:load_config() abort
 		nnoremap <leader>l :OL<CR>
 	endif
 
+	" atsumori123/popupmarks.vim
+	if s:IsEnable('popupmarks.vim')
+		nnoremap <Leader>m :PopupMarks<CR>
+	endif
+
+	" preservim/tagbar
 	if s:IsEnable('tagbar')
 		" sortしない
 		let g:tagbar_sort = 0
@@ -122,11 +129,13 @@ function! s:load_config() abort
 		" Tagbarを開いたときに自動的にフォーカスする
 		let g:tagbar_autofocus = 1
 		" Tagbarの表示/非表示をF3キーに割り当て
-		nnoremap <F3> :TagbarToggle<CR>
+		nnoremap <F3> :TagbarOpen fj<CR>
 	endif
 
-	" test
-	nnoremap <leader>[ :source ~/vimfiles/script/test.vim<CR>
+	" replace
+	nnoremap <leader>r :<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace('n')<CR>
+	xnoremap <leader>r :<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace('v')<CR>
+
 endfunction
 
 "***************************************

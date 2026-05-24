@@ -131,9 +131,6 @@ nnoremap U <C-r>
 noremap <leader>e `.
 " 次のジャンプ箇所へ移動
 noremap <C-l> <C-i>
-" Tabキーでウィンドウ切り替え
-noremap <Tab> <C-W>w
-noremap <S-Tab> <C-W>W
 " ノーマルモードで改行を有効にする
 nnoremap <CR> i<CR><ESC>
 " ノーマルモードでもBSキーで文字削除
