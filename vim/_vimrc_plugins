@@ -99,7 +99,6 @@ function! s:load_config() abort
 		nmap <S-TAB> <Plug>(wb-prev-window)<CR>
 		nmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		tmap <C-t> <Plug>(wb-toggle-terminal)<CR>
-		tmap <C-r> <Plug>(wb-rotate-terminal)<CR>
 		nmap <C-p> <Plug>(wb-toggle-preview)<CR>
 		nmap q <Plug>(wb-toggle-quickfix)<CR>
 		let g:switch_all_window = 1

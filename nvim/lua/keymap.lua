@@ -8,12 +8,12 @@ map('i', '<C-j>', '<ESC>', opts)
 -- ESCキー2回でハイライトoff
 map('n', '<ESC><ESC>', ':<C-u>set nohlsearch!<CR>', opts)
 -- INSERTモード中のカーソル移動
-map('i', '<c-b>', '<Left>', opts)
+map('i', '<c-h>', '<Left>', opts)
 map('i', '<c-j>', '<Down>', opts)
 map('i', '<c-k>', '<Up>', opts)
 map('i', '<c-l>', '<Right>', opts)
 -- 'q'による記録を無効
-map('', 'q', '<nop>', opts)
+--map('', 'q', '<nop>', opts)
 --カーソルの後ろにペースト後、カーソルをペースト開始時の位置に戻す
 map('n', '<leader>p', 'P`[', opts)
 -- 削除のみ
@@ -70,3 +70,7 @@ map('n', 't', 'g<C-]>', opts)
 map('v', 't', [["zygv<ESC><ESC>:exe("tjump ".@z)<CR>]], opts)
 -- Back tag jamp
 map('n', 'T', '<C-t>', opts)
+-- ESCキーでターミナルのノーマルモードに移行
+map('t', '<C-v>', [[<C-\><C-o>"0p]], opts)
+-- ターミナルモード中にCtrl+Vで、ヤンクした内容（0レジスタ）をペースト
+map('t', '<Esc>', [[<C-\><C-n>]], opts)

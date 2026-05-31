@@ -8,7 +8,7 @@ local function plug(plugin)
 	table.insert(VimPlugins, plugin)
 end
 
-local function Enabled(plugin)
+local function IsEnable(plugin)
 	for k, v in pairs(VimPlugins) do
 		if v == plugin then return true end
 	end
@@ -16,43 +16,47 @@ local function Enabled(plugin)
 end
 
 ----------------------------------------
+-- vim original plugin
+----------------------------------------
+vim.cmd('packadd cfilter')
+
+----------------------------------------
 -- Define load plugin
 ----------------------------------------
 plug('vim-lucius')
-plug('gr.vim')
-plug('oldfiles.nvim')
+plug('glog.vim')
+plug('nvim/gr.vim')
+plug('nvim/oldfiles.vim')
+plug('nvim/unmemorable.vim')
 plug('minfy.vim')
 plug('stline.vim')
-plug('various.vim')
+plug('winbuf.vim')
 plug('vim-easymotion')
-plug('diffview.nvim')
-plug('Comment.nvim')
-plug('toggleterm.nvim')
 plug('gitsigns.nvim')
-plug('outline.nvim')
 plug('nvim-lspconfig')
 plug('mason.nvim')
+plug('tagbar')
 
 ----------------------------------------
 -- Define plugin loading configuration
 ----------------------------------------
 local function load_config()
 	-- jonathanfilip/vim-lucius
-	if Enabled('vim-lucius') then
+	if IsEnable('vim-lucius') then
 		vim.cmd('colorscheme lucius')
 		vim.cmd('highlight Search ctermbg=222 ctermfg=0 guibg=moccasin guifg=#484848')
 	end
 
-	-- vim-scripts/taglist.vim
-	if Enabled('taglist.vim') then
-		vim.g.Tlist_GainFocus_On_ToggleOpen = 1		-- When you open the tag list, focus on the tag list
-		vim.g.Tlist_File_Fold_Auto_Close = 1		-- Automatically close tag list when file is inactive
-		vim.g.Tlist_Show_One_File = 1				-- Show only the tags of the source you are currently editing
-		map('n', '<F11>', ':TlistToggle<CR>', opts)
+	-- morhetz/gruvbox
+	if IsEnable('gruvbox') then
+		vim.cmd('colorscheme gruvbox')
+		vim.opt.bg = light
+		vim.g.gruvbox_bold = 0
 	end
 
 	-- atsumori123/stline.vim
-	if Enabled('stline.vim') then
+	if IsEnable('stline.vim') then
+--		vim.g.stline_theme = 'gruvbit_light'
 		vim.g.stline_theme = 'monochrome'
 		map('n', '<leader>1', '<Plug>STLine.Go(1)', opts)
 		map('n', '<leader>2', '<Plug>STLine.Go(2)', opts)
@@ -67,40 +71,46 @@ local function load_config()
 	end
 
 	-- atsumori123/gr.vim
-	if Enabled('gr.vim') then
-		map('', '<leader>g', ':Gr<CR>', opts)
-		vim.g.GR_GrepCommand = 'ripgrep'
+	if IsEnable('nvim/gr.vim') then
+		require('gr').setup({grepprg = "grep"})
+		map('n', '<leader>g', ':Gr<CR>', opts)
+		map('v', '<leader>g', ':Gr<CR>', opts)
 	end
 
-	-- atsumori123/oldfiles.nvim
-	if Enabled('oldfiles.nvim') then
+	-- atsumori123/unmemorable.vim
+	if IsEnable('nvim/unmemorable.vim') then
+		map('n', '<leader>t', ':Unmemorable<CR>', opts)
+		map('v', '<leader>t', ':Unmemorable<CR>', opts)
+	end
+
+	-- atsumori123/oldfiles.vim
+	if IsEnable('nvim/oldfiles.vim') then
 		require('oldfiles').setup()
 		map('n', '<leader>l', ':OldFiles<CR>', opts)
 	end
 
-	-- atsumori123/various.vim
-	if Enabled('various.vim') then
-		map('n', '<leader>b', '<Plug>(various-buffer)<CR>', opts)
-		map('n', '<leader>m', '<Plug>(various-marks)<CR>', opts)
-		map('n', '<S-j>', '<Plug>(various-next-buffer)<CR>', opts)
-		map('n', '<S-k>', '<Plug>(various-prev-buffer)<CR>', opts)
-		map('n', '<leader>x', '<Plug>(various-close)<CR>', opts)
-		map('n', '<C-p>', '<Plug>(various-preview)<CR>', opts)
-		map('n', '<leader>q', '<Plug>(various-quickfix)<CR>', opts)
-		map('n', 'zc', '<Plug>(various-display-in-center)<CR>', opts)
-		map('n', '<C-t>', '<Plug>(various-toggle-terminal)<CR>', opts)
-		map('t', '<C-t>', '<Plug>(various-toggle-terminal)<CR>', opts)
-		map('', '<leader>r', ':Replace<CR>', opts)
-		map('', '<leader>t', ':Tips<CR>', opts)
+	-- atsumori123/winbuf.vim
+	if IsEnable('winbuf.vim') then
+		map('n', '<leader>b', '<Plug>(wb-buffer-list)<CR>', opts)
+		map('n', '<leader>x', '<Plug>(wb-buffer-close)<CR>', opts)
+		map('n', '<S-j>', '<Plug>(wb-next-buffer)<CR>', opts)
+		map('n', '<S-k>', '<Plug>(wb-prev-buffer)<CR>', opts)
+		map('n', '<TAB>', '<Plug>(wb-next-window)<CR>', opts)
+		map('n', '<S-TAB>', '<Plug>(wb-prev-window)<CR>', opts)
+		map('n', '<C-t>', '<Plug>(wb-toggle-terminal)<CR>', opts)
+		map('t', '<C-t>', '<Plug>(wb-toggle-terminal)<CR>', opts)
+		map('n', '<C-p>', '<Plug>(wb-toggle-preview)<CR>', opts)
+		map('n', 'q', '<Plug>(wb-toggle-quickfix)<CR>', opts)
+		vim.g.switch_all_window = 1
 	end
 
 	-- atsumori123/minfy.vim
-	if Enabled('minfy.vim') then
-		map('n', '<c-o>', ':execute "Minfy ".expand("%:p:h")<CR>', opts)
+	if IsEnable('minfy.vim') then
+		map('n', '\\', ':execute "Minfy ".expand("%:p:h")<CR>', opts)
 	end
 
 	-- vim-EasyMotionTarget
-	if Enabled('vim-easymotion') then
+	if IsEnable('vim-easymotion') then
 		vim.g.EasyMotion_do_mapping = 0
 		vim.g.EasyMotion_smartcase = 1
 		vim.g.EasyMotion_use_migemo = 1
@@ -109,62 +119,42 @@ local function load_config()
 		map('n', 'f', '<Plug>(easymotion-bd-f)', opts)
 	end
 
-	-- sindrets/diffview.nvim
-	if Enabled('diffview.nvim') then
-		require("diffview").setup({
-			use_icons = false,
-		})
-		local diffview_func = function()
-			local mode = vim.fn.input("1:Changes, 2:File history, 3:Close : ")
-			if	   mode == "1" then vim.cmd('DiffviewOpen')
-			elseif mode == "2" then vim.cmd('DiffviewFileHistory')
-			elseif mode == "3" then vim.cmd('DiffviewClose')
-			end
-			vim.cmd('echo "\r"')
-		end
-		vim.keymap.set('n', '<F9>', function() diffview_func() end)
-	end
-
-	-- numToStr/Comment.nvim
-	if Enabled('Comment.nvim') then
-		require('Comment').setup()
-  		map('n', '<leader>c', '<Plug>(comment_toggle_linewise_current)', opts)
-	    map('x', '<leader>c', '<Plug>(comment_toggle_linewise_visual)', opts)
-	end
-
-	-- akinsho/toggleterm.nvim
-	if Enabled('toggleterm.nvim') then
-		require('toggleterm').setup{
-			open_mapping = [[<c-\>]],
-			direction = 'float',
-		}
+	-- akinsho/glog.vim
+	if IsEnable('glog.vim') then
 	end
 
 	-- lewis6991/gitsigns.nvim
-	if Enabled('gitsigns.nvim') then
+	if IsEnable('gitsigns.nvim') then
 		require('gitsigns').setup()
 	end
 
-	-- hedyhli/outline.nvim
-	if Enabled('outline.nvim') then
-		require('outline').setup()
-		map('n', '<F11>', ':Outline<CR>', opts)
+	-- preservim/tagbar
+	if IsEnable('tagbar') then
+		-- sortしない
+		vim.g.tagbar_sort = 0
+		-- 行番号を表示する(1:右側, 2:左側)
+		vim.g.tagbar_show_tag_linenumbers = 1
+		-- Tagbarを開いたときに自動的にフォーカスする
+		vim.grtagbar_autofocus = 1
+		-- Tagbarの表示/非表示をF3キーに割り当て
+		map('n', '<F3>', ':TagbarOpen jf<CR>', opts)
 	end
 
 	-- williamboman/mason.nvim
-	if Enabled('mason.nvim') then
+	if IsEnable('mason.nvim') then
 		require("mason").setup()
 	end
 
 	-- neovim/nvim-lspconfig
-	if Enabled('nvim-lspconfig') then
+	if IsEnable('nvim-lspconfig') then
 		local lspconfig = require("lspconfig")
 		lspconfig.clangd.setup({})
 		vim.diagnostic.disable()
 	end
 
-	-- test
---	map('n', '<leader>[', ':source ~/vimfiles/script/test.vim<CR>', opts)
+	-- replace
+	map('n', '<leader>r', ':<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace("n")<CR>', opts)
+	map('x', '<leader>r', ':<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace("v")<CR>', opts)
 end
 
 ----------------------------------------
@@ -172,7 +162,7 @@ end
 ----------------------------------------
 local lazy_setup = function()
 	-- vim-EasyMotionTarget
-	if Enabled('vim-easymotion') then
+	if IsEnable('vim-easymotion') then
 		vim.cmd('highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan')
 	end
 end
