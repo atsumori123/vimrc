@@ -101,7 +101,8 @@ function! s:load_config() abort
 		tmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		nmap <C-p> <Plug>(wb-toggle-preview)<CR>
 		nmap q <Plug>(wb-toggle-quickfix)<CR>
-		let g:switch_all_window = 1
+		let g:winbuf_switch_all_window = 0
+		let g:winbuf_shell_type = &shell
 	endif
 
 	" atsumori123/unmemorable.vim

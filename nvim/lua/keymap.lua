@@ -70,6 +70,9 @@ map('n', 't', 'g<C-]>', opts)
 map('v', 't', [["zygv<ESC><ESC>:exe("tjump ".@z)<CR>]], opts)
 -- Back tag jamp
 map('n', 'T', '<C-t>', opts)
+-- 現在行をマークとマークした位置に移動
+map('n', 'mm', 'mZ:silent redraw <Bar>echohl Tag<Bar>echomsg "Marked"<Bar>echohl None<CR>', bufopts)
+map('n', 'M', "'Z", bufopts)
 -- ESCキーでターミナルのノーマルモードに移行
 map('t', '<C-v>', [[<C-\><C-o>"0p]], opts)
 -- ターミナルモード中にCtrl+Vで、ヤンクした内容（0レジスタ）をペースト

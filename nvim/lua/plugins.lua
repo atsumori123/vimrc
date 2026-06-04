@@ -101,7 +101,8 @@ local function load_config()
 		map('t', '<C-t>', '<Plug>(wb-toggle-terminal)<CR>', opts)
 		map('n', '<C-p>', '<Plug>(wb-toggle-preview)<CR>', opts)
 		map('n', 'q', '<Plug>(wb-toggle-quickfix)<CR>', opts)
-		vim.g.switch_all_window = 1
+		vim.g.winbuf_switch_all_window = 0
+		vim.g.winbuf_shell_type = vim.o.shell
 	end
 
 	-- atsumori123/minfy.vim

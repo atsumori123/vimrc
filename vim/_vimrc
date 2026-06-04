@@ -156,8 +156,8 @@ vnoremap t "zygv<ESC><ESC>:exe("tjump ".@z)<CR>
 " Back tag jamp
 nnoremap T <C-t>
 " 現在行をマークとマークした位置に移動
-nnoremap mm mm:silent redraw <Bar>echohl Tag<Bar>echomsg 'Marked'<Bar>echohl None<CR>
-nnoremap M 'm
+nnoremap mm mZ:silent redraw <Bar>echohl Tag<Bar>echomsg 'Marked'<Bar>echohl None<CR>
+nnoremap M 'Z
 " ESCキーでターミナルのノーマルモードに移行
 tnoremap <Esc> <C-\><C-n>
 " ターミナルモード中にCtrl+Vで、ヤンクした内容（0レジスタ）をペースト
