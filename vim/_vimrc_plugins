@@ -21,8 +21,8 @@ endif
 "***************************************
 " Define load plugin
 "***************************************
-call s:plug('vim-lucius')
-"call s:plug('iceberg.vim')
+"call s:plug('vim-lucius')
+call s:plug('iceberg.vim')
 call s:plug('stline.vim')
 call s:plug('gr.vim')
 call s:plug('minfy.vim')
@@ -54,8 +54,8 @@ function! s:load_config() abort
 
 	" atsumori123/stline.vim
 	if s:IsEnable('stline.vim')
-"		let g:stline_theme = 'iceberg'
-		let g:stline_theme = 'monochrome'
+		let g:stline_theme = 'iceberg'
+"		let g:stline_theme = 'monochrome'
 		nmap <leader>1 <Plug>STLine.Go(1)
 		nmap <leader>2 <Plug>STLine.Go(2)
 		nmap <leader>3 <Plug>STLine.Go(3)
@@ -93,10 +93,11 @@ function! s:load_config() abort
 	if s:IsEnable('winbuf.vim')
 		nmap <leader>b <Plug>(wb-buffer-list)<CR>
 		nmap <leader>x <Plug>(wb-buffer-close)<CR>
-		nmap <S-j> <Plug>(wb-next-buffer)<CR>
-		nmap <S-k> <Plug>(wb-prev-buffer)<CR>
+		nmap <C-l> <Plug>(wb-next-buffer)<CR>
+		nmap <C-h> <Plug>(wb-prev-buffer)<CR>
 		nmap <TAB> <Plug>(wb-next-window)<CR>
 		nmap <S-TAB> <Plug>(wb-prev-window)<CR>
+		nmap <C-w>s <Plug>(wb-resize-window)<CR>
 		nmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		tmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		nmap <C-p> <Plug>(wb-toggle-preview)<CR>
@@ -117,7 +118,12 @@ function! s:load_config() abort
 
 	" atsumori123/popupmarks.vim
 	if s:IsEnable('popupmarks.vim')
-		nnoremap <Leader>m :PopupMarks<CR>
+		nnoremap <silent>mp :OpenMarks popup<CR>
+		nnoremap <silent>mb :OpenMarks Buffer<CR>
+		nnoremap <silent><leader>m :OpenMarks Buffer<CR>
+		nnoremap <silent>ma :EditMarks Add<CR>
+		nnoremap <silent>md :EditMarks Del<CR>
+		nnoremap <silent>me :EditMarks Edit<CR>
 	endif
 
 	" preservim/tagbar
@@ -135,6 +141,9 @@ function! s:load_config() abort
 	" replace
 	nnoremap <leader>r :<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace('n')<CR>
 	xnoremap <leader>r :<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace('v')<CR>
+
+	" for test
+	nnoremap <leader>[ :<C-u>source ~/vimfiles/script/test.vim<CR>
 
 endfunction
 

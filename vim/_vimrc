@@ -129,8 +129,8 @@ noremap <S-l> $
 nnoremap U <C-r>
 " 最後に編集した箇所に移動
 noremap <leader>e `.
-" 次のジャンプ箇所へ移動
-noremap <C-l> <C-i>
+" 次のジャンプ箇所に移動
+noremap <C-p> <C-i>
 " ノーマルモードで改行を有効にする
 nnoremap <CR> i<CR><ESC>
 " ノーマルモードでもBSキーで文字削除

@@ -29,8 +29,6 @@ map('n', 'S', '"_S', opts)
 -- 折り返し時に表示行単位での移動できるようにする
 map('n', 'j', 'gj', opts)
 map('n', 'k', 'gk', opts)
--- 改行削除
-map('n', '<leader>d', 'J', opts)
 -- 行頭/行末に移動
 map('', '<S-h>', '0', opts)
 map('', '<S-l>', '$', opts)
