@@ -38,7 +38,7 @@ set number
 " 現在の行を強調表示
 set cursorline
 " 現在の桁を強調表示
-set cursorcolumn
+"set cursorcolumn
 " 行末の1文字先までカーソル移動可
 set virtualedit=onemore
 " 矩形選択中は行末に文字が無くてもカーソルを行末以降に移動させることが可能
@@ -96,6 +96,8 @@ set splitright
 set splitbelow
 " マクロ実行中やカーソル移動の再描画を抑制してパフォーマンスを上げる
 set lazyredraw
+" ウィンドウズ環境下でもディレクトリの区切り文字をスラッシュにする
+set shellslash
 
 "--------------------------------
 " keymap
@@ -130,7 +132,7 @@ nnoremap U <C-r>
 " 最後に編集した箇所に移動
 noremap <leader>e `.
 " 次のジャンプ箇所に移動
-noremap <C-p> <C-i>
+noremap <C-n> <C-i>
 " ノーマルモードで改行を有効にする
 nnoremap <CR> i<CR><ESC>
 " ノーマルモードでもBSキーで文字削除
@@ -150,10 +152,8 @@ nnoremap <leader>a ggVG
 " 次/前の差分へ
 nnoremap <C-j> ]c
 nnoremap <C-k> [c
-" If there are multiple declaration sources in tag jump, select from the list
+" Tag jump / Back tag jump
 nnoremap t g<c-]>
-vnoremap t "zygv<ESC><ESC>:exe("tjump ".@z)<CR>
-" Back tag jamp
 nnoremap T <C-t>
 " 現在行をマークとマークした位置に移動
 nnoremap mm mZ:silent redraw <Bar>echohl Tag<Bar>echomsg 'Marked'<Bar>echohl None<CR>

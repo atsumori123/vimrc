@@ -26,14 +26,13 @@ call s:plug('iceberg.vim')
 call s:plug('stline.vim')
 call s:plug('gr.vim')
 call s:plug('minfy.vim')
-call s:plug('vim-easymotion')
 call s:plug('winbuf.vim')
 call s:plug('unmemorable.vim')
-call s:plug('oldfiles.vim')
 call s:plug('glog.vim')
 call s:plug('vim-oscyank')
 call s:plug('tagbar')
 call s:plug('popupmarks.vim')
+call s:plug('filefinder.vim')
 
 "***************************************
 " Define plugin loading configuration
@@ -97,11 +96,14 @@ function! s:load_config() abort
 		nmap <C-h> <Plug>(wb-prev-buffer)<CR>
 		nmap <TAB> <Plug>(wb-next-window)<CR>
 		nmap <S-TAB> <Plug>(wb-prev-window)<CR>
+		nmap @ <Plug>(wb-special-window)<CR>
 		nmap <C-w>s <Plug>(wb-resize-window)<CR>
 		nmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		tmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		nmap <C-p> <Plug>(wb-toggle-preview)<CR>
 		nmap q <Plug>(wb-toggle-quickfix)<CR>
+		nmap f <Plug>(wb-easymotion)<CR>
+		let g:winbuf_easymotion_enable = 1
 		let g:winbuf_switch_all_window = 0
 		let g:winbuf_shell_type = &shell
 	endif
@@ -111,19 +113,18 @@ function! s:load_config() abort
 		noremap <leader>t :Unmemorable<CR>
 	endif
 
-	" atsumori123/oldfiles.vim
-	if s:IsEnable('oldfiles.vim')
-		nnoremap <leader>l :OL<CR>
-	endif
-
 	" atsumori123/popupmarks.vim
 	if s:IsEnable('popupmarks.vim')
-		nnoremap <silent>mp :OpenMarks popup<CR>
-		nnoremap <silent>mb :OpenMarks Buffer<CR>
-		nnoremap <silent><leader>m :OpenMarks Buffer<CR>
+		nnoremap <silent><leader>m :OpenMarks<CR>
 		nnoremap <silent>ma :EditMarks Add<CR>
 		nnoremap <silent>md :EditMarks Del<CR>
 		nnoremap <silent>me :EditMarks Edit<CR>
+	endif
+
+	" atsumori123/filefinder.vim
+	if s:IsEnable('filefinder.vim')
+		nnoremap <silent><c-e> :FF<CR>
+		nnoremap <silent><leader>l :OL<CR>
 	endif
 
 	" preservim/tagbar
@@ -151,10 +152,6 @@ endfunction
 " Define plugin lazy setup
 "***************************************
 function! s:lazy_setup() abort
-	"easymotion/vim-easymotion
-	if s:IsEnable('vim-easymotion')
-		highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
-	endif
 endfunction
 
 "***************************************

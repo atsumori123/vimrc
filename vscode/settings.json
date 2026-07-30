@@ -1,0 +1,96 @@
+{
+    // VSCodeのエディタ設定
+    "editor.fontSize": 16, // font size
+    "editor.renderWhitespace": "boundary", // 空白表示設定
+    "editor.renderControlCharacters": true, // 制御文字の表示
+    //"editor.fontFamily": "Cica, Consolas, 'Courier New', monospace", // font設定
+
+    // ノーマルモードに戻るときIMEをオフにする
+    "vim.autoSwitchInputMethod.enable": true,
+    "vim.autoSwitchInputMethod.defaultIM": "0",
+    "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Tools\\path\\zenhan.exe 0",
+    "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Tools\\path\\zenhan.exe {im}",
+
+    // 検索除外対象のディレクトリ
+    "search.exclude": {
+        "**/bower_components": true,
+        "**/vendor": true,
+        "**/env": true,
+        "tags":true,
+        "**/.svn": true,
+        "**/.git": true,
+        "**/.DS_Store": true
+    },
+
+    // ワークベンチ設定
+    "vim.leader": "<space>", // leaderキーを設定
+    "vim.useCtrlKeys": true, // Ctrlを使った操作を有効にする
+    "vim.useSystemClipboard": true, // OS側とクリップボードの共有
+    "vim.hlsearch": true, // 検索結果をハイライト表示
+    "vim.wrapscan": false, // 検索がファイル末尾まで進んだらストップ 
+    "vim.ignorecase": true, // 検索するときに大文字小文字を区別しない 
+    "vim.smartcase": true, // 小文字で検索すると大文字と小文字を無視して検索 
+
+    // vimプラグイン
+    "vim.easymotion": true, // easymotion
+    "vim.easymotionKeys": "hklyuiopnmqwertzxcvbasdgjf", 
+    "vim.easymotionMarkerForegroundColorOneChar": "#00a1e9",
+    "vim.visualstar": true, // ビジュアルモードで*,#の検索を可能にする
+
+    // ノーマルモード時のキーマッピング
+    "vim.normalModeKeyBindings": [
+        { "before": ["j"], "after": ["g","j"] }, // 折り返し時に表示行単位での移動できるようにする 
+        { "before": ["k"], "after": ["g","k"] }, // 折り返し時に表示行単位での移動できるようにする 
+        { "before": ["H"], "after": ["0"] }, // 行頭に移動 
+        { "before": ["L"], "after": ["$"] }, // 行末に移動 
+        { "before": ["m","m"], "after": ["d","d"] }, // 行の切り取り
+        { "before": ["U"], "after": ["ctrl+r"] }, // redo
+        { "before": ["<END>"], "after": ["`","."] }, // 最後に編集した場所に移動
+        { "before": ["<TAB>"], "after": ["ctrl+w","w"] }, // 次のウィンドウに切り替え
+        { "before": ["<shift+TAB>"], "after": ["ctrl+w","W"] }, // 前のウィンドウに切り替え
+        { "before": ["<CR>"], "after": ["i","<CR>","<ESC>"] }, // ノーマルモードの改行キーを有効
+        { "before": ["<BS>"], "after": ["i","<BS>","<ESC>","l"] }, // ノーマルモードでBSキーを有効
+        { "before": ["q"], "after": ["<NOP"] }, // 記録終了キーを無効
+        { "before": ["H"], "after": ["0"] }, // 行頭に移動 
+        { "before": ["L"], "after": ["$"] }, // 行末に移動 
+        { "before": ["J"], "commands": [":bn"] },  // 次のバッファに移動
+        { "before": ["K"], "commands": [":bp"] },  // 前のバッファに移動
+        { "before": ["<F10>"], "command": [":diffthic"] }, // diff
+        { "before": ["<leader>","e"], "after": ["`","."] }, // 最後に編集した場所に移動
+        { "before": ["<leader>","d"], "after": ["J"] }, // 改行削除 
+        { "before": ["<leader>","a"], "after": ["g","g","V","G"] }, // 全選択
+        { "before": ["<leader>","x"], "after": [":","q","<CR>"] }, // ファイルを閉じる
+        { "before": ["<leader>","g"], "commands": ["workbench.action.findInFiles"], "when": ["!searchEditorInput"] }, // 検索バーに移動
+        { "before": ["f"], "after": ["<leader>","<leader>","s","<char>"] }, // easymotion(任意の1文字)
+    ],
+
+    // インサートモード時のキーマッピング
+    "vim.insertModeKeyBindings": [
+        { "before": ["j","j"], "after": ["<ESC>"] }, // jjでノーマルモードに戻る
+        { "before": ["<c-h>"], "after": ["<LEFT>"] }, // カーソルを左に移動
+        { "before": ["<c-j>"], "after": ["<DOWN>"] }, // カーソルを下に移動
+        { "before": ["<c-k>"], "after": ["<UP>"] }, // カーソルを上に移動
+        { "before": ["<c-l>"], "after": ["<RIGHT>"] }, // カーソルを右に移動
+    ],
+
+    // ビジュアルモード時のキーマッピング
+    "vim.visualModeKeyBindings": [
+        { "before": ["d"], "after": ["\"","_","d"] },    // 削除した文字をヤンクしない 
+        { "before": ["D"], "after": ["\"","_","D"] },    // 削除した文字をヤンクしない 
+        { "before": ["s"], "after": ["\"","_","s"] },    // 削除した文字をヤンクしない 
+        { "before": ["S"], "after": ["\"","_","S"] },    // 削除した文字をヤンクしない 
+    ],
+
+    "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["x"], "after": ["\"","_","x"] },    // 削除した文字をヤンクしない 
+        { "before": ["s"], "after": ["\"","_","s"] },    // 削除した文字をヤンクしない 
+        { "before": ["d"], "after": ["\"","_","d"] },    // 削除した文字をヤンクしない 
+        { "before": ["D"], "after": ["\"","_","D"] },    // 削除した文字をヤンクしない 
+        { "before": ["S"], "after": ["\"","_","S"] },    // 削除した文字をヤンクしない 
+        { "before": ["<ESC>"], "commands": [":nohl"] }   // <ESC>2回でハイライト消去
+    ],
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+
+}

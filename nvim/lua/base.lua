@@ -45,7 +45,7 @@ vim.opt.title = true
 -- 現在の行を強調表示
 vim.opt.cursorline = true
 -- 現在の桁を強調表示
-vim.opt.cursorcolumn = true
+--vim.opt.cursorcolumn = true
 -- C言語風にインデント
 vim.opt.smartindent = true
 -- 括弧の連携
@@ -70,6 +70,16 @@ vim.opt.ambiwidth = 'double'
 vim.opt.diffopt:append{'vertical'}
 -- use gui color
 vim.opt.termguicolors = true
+-- ビープ音を消す
+vim.opt.belloff = 'all'
+-- 垂直分割時に右側に開く
+vim.opt.splitright = true
+-- 水平分割時に下側に開く
+vim.opt.splitbelow = true
+-- マクロ実行中やカーソル移動の再描画を抑制してパフォーマンスを上げる
+vim.opt.lazyredraw = true
+-- ウィンドウズ環境下でもディレクトリの区切り文字をスラッシュにする
+vim.opt.shellslash = true
 
 -- -------------------------------------
 --  Search
