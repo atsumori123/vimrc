@@ -26,11 +26,11 @@ call s:plug('iceberg.vim')
 call s:plug('stline.vim')
 call s:plug('gr.vim')
 call s:plug('minfy.vim')
+call s:plug('vimdoc-ja')
 call s:plug('winbuf.vim')
 call s:plug('unmemorable.vim')
 call s:plug('glog.vim')
 call s:plug('vim-oscyank')
-call s:plug('tagbar')
 call s:plug('popupmarks.vim')
 call s:plug('filefinder.vim')
 
@@ -78,20 +78,11 @@ function! s:load_config() abort
 		nnoremap <silent>\ :execute "Minfy ".expand("%:p:h")<CR>
 	endif
 
-	" easymotion/vim-easymotion
-	if s:IsEnable('vim-easymotion')
-		let g:EasyMotion_do_mapping = 0
-		let g:EasyMotion_smartcase = 1
-		let g:EasyMotion_use_migemo = 1
-		let g:EasyMotion_use_upper = 1
-		let g:EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
-		nmap f <Plug>(easymotion-bd-f)
-	endif
-
 	" atsumori123/winbuf.vim
 	if s:IsEnable('winbuf.vim')
 		nmap <leader>b <Plug>(wb-buffer-list)<CR>
-		nmap <leader>x <Plug>(wb-buffer-close)<CR>
+		nmap q <Plug>(wb-buffer-close)<CR>
+		nmap <C-q> <Plug>(wb-buffer-close_all)<CR>
 		nmap <C-l> <Plug>(wb-next-buffer)<CR>
 		nmap <C-h> <Plug>(wb-prev-buffer)<CR>
 		nmap <TAB> <Plug>(wb-next-window)<CR>
@@ -101,16 +92,21 @@ function! s:load_config() abort
 		nmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		tmap <C-t> <Plug>(wb-toggle-terminal)<CR>
 		nmap <C-p> <Plug>(wb-toggle-preview)<CR>
-		nmap q <Plug>(wb-toggle-quickfix)<CR>
+		nmap <leader>q <Plug>(wb-toggle-quickfix)<CR>
 		nmap f <Plug>(wb-easymotion)<CR>
+		nmap <F3> <Plug>(wb-taglist)<CR>
 		let g:winbuf_easymotion_enable = 1
-		let g:winbuf_switch_all_window = 0
-		let g:winbuf_shell_type = &shell
+		let g:winbuf_taglist_enable = 1
+		let g:winbuf_switch_all_window = 1
+"		let g:winbuf_shell_type = &shell
+		let g:winbuf_shell_type = 'bash'
 	endif
 
 	" atsumori123/unmemorable.vim
 	if s:IsEnable('unmemorable.vim')
 		noremap <leader>t :Unmemorable<CR>
+		let g:unmemorable_auto_complete_enable = 1
+		let g:unmemorable_osc_yank_enable = 0
 	endif
 
 	" atsumori123/popupmarks.vim
@@ -136,7 +132,7 @@ function! s:load_config() abort
 		" Tagbarを開いたときに自動的にフォーカスする
 		let g:tagbar_autofocus = 1
 		" Tagbarの表示/非表示をF3キーに割り当て
-		nnoremap <F3> :TagbarOpen fj<CR>
+		nnoremap <F4> :TagbarOpen fj<CR>
 	endif
 
 	" replace
@@ -152,6 +148,10 @@ endfunction
 " Define plugin lazy setup
 "***************************************
 function! s:lazy_setup() abort
+	"easymotion/vim-easymotion
+	" if s:IsEnable('vim-easymotion')
+	" 	highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan
+	" endif
 endfunction
 
 "***************************************
