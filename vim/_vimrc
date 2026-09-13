@@ -150,8 +150,8 @@ noremap <S-F12> @t
 " 全て選択
 nnoremap <leader>a ggVG
 " 次/前の差分へ
-nnoremap <C-j> ]c
-nnoremap <C-k> [c
+"nnoremap <C-j> ]c
+"nnoremap <C-k> [c
 " Tag jump / Back tag jump
 nnoremap t g<c-]>
 nnoremap T <C-t>

@@ -70,7 +70,7 @@ function! s:load_config() abort
 	" atsumori123/gr.vim
 	if s:IsEnable('gr.vim')
 		noremap <silent><leader>g :Gr<CR>
-		let g:GR_GrepCommand = 'grep'	" internal/grep/rg/git grep
+		let g:GR_GrepCommand = 'internal'	" internal/grep/rg/git grep
 	endif
 
 	" atsumori123/minfy.vim
@@ -98,8 +98,8 @@ function! s:load_config() abort
 		let g:winbuf_easymotion_enable = 1
 		let g:winbuf_taglist_enable = 1
 		let g:winbuf_switch_all_window = 1
-"		let g:winbuf_shell_type = &shell
-		let g:winbuf_shell_type = 'bash'
+		let g:winbuf_shell_type = &shell
+"		let g:winbuf_shell_type = 'bash'
 	endif
 
 	" atsumori123/unmemorable.vim
@@ -121,6 +121,11 @@ function! s:load_config() abort
 	if s:IsEnable('filefinder.vim')
 		nnoremap <silent><c-e> :FF<CR>
 		nnoremap <silent><leader>l :OL<CR>
+	endif
+
+	" atsumori123/glog.vim
+	if s:IsEnable('glog.vim')
+		let g:gsign_disable = 0
 	endif
 
 	" preservim/tagbar

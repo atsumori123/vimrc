@@ -111,3 +111,8 @@ vim.opt.tags = './tags;$HOME'
 --ノーマルモードに戻るときIMEをOFFにする
 vim.cmd('autocmd InsertLeave * :call system("zenhan 0")')
 vim.cmd('autocmd CmdlineLeave * :call system("zenhan 0")')
+
+-- -------------------------------------
+--  python
+-- -------------------------------------
+vim.g.python_recommended_style = 0

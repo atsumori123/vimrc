@@ -33,11 +33,8 @@ plug('minfy.vim')
 plug('stline.vim')
 plug('winbuf.vim')
 plug('filefinder.vim')
-plug('vim-easymotion')
 plug('gitsigns.nvim')
-plug('nvim-lspconfig')
 plug('mason.nvim')
-plug('tagbar')
 
 ----------------------------------------
 -- Define plugin loading configuration
@@ -87,7 +84,8 @@ local function load_config()
 	-- atsumori123/winbuf.vim
 	if IsEnable('winbuf.vim') then
 		map('n', '<leader>b', '<Plug>(wb-buffer-list)<CR>', opts)
-		map('n', '<leader>x', '<Plug>(wb-buffer-close)<CR>', opts)
+		map('n', 'q', '<Plug>(wb-buffer-close)<CR>', opts)
+		map('n', '<C-q>', '<Plug>(wb-buffer-close_all)<CR>', opts)
 		map('n', '<C-l>', '<Plug>(wb-next-buffer)<CR>', opts)
 		map('n', '<C-h>', '<Plug>(wb-prev-buffer)<CR>', opts)
 		map('n', '<TAB>', '<Plug>(wb-next-window)<CR>', opts)
@@ -97,8 +95,12 @@ local function load_config()
 		map('n', '<C-t>', '<Plug>(wb-toggle-terminal)<CR>', opts)
 		map('t', '<C-t>', '<Plug>(wb-toggle-terminal)<CR>', opts)
 		map('n', '<C-p>', '<Plug>(wb-toggle-preview)<CR>', opts)
-		map('n', 'q', '<Plug>(wb-toggle-quickfix)<CR>', opts)
-		vim.g.winbuf_switch_all_window = 0
+		map('n', 'f', '<Plug>(wb-easymotion)<CR>', opts)
+		map('n', '<F3>', '<Plug>(wb-taglist)<CR>', opts)
+		map('n', '<leader>q', '<Plug>(wb-toggle-quickfix)<CR>', opts)
+		vim.g.winbuf_taglist_enable = 1
+		vim.g.winbuf_easymotion_enable = 1
+		vim.g.winbuf_switch_all_window = 1
 		vim.g.winbuf_shell_type = vim.o.shell
 	end
 
@@ -121,31 +123,14 @@ local function load_config()
 		map('n', '<leader>l', ':OL<CR>', opts)
 	end
 
-	-- vim-EasyMotionTarget
-	if IsEnable('vim-easymotion') then
-		vim.g.EasyMotion_do_mapping = 0
-		vim.g.EasyMotion_smartcase = 1
-		vim.g.EasyMotion_use_migemo = 1
-		vim.g.EasyMotion_use_upper = 1
-		vim.g.EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf'
-		map('n', 'f', '<Plug>(easymotion-bd-f)', opts)
+	-- atsumori123/glog.vim
+	if IsEnable('glog.vim') then
+		vim.g.gsign_disable = 1
 	end
 
 	-- lewis6991/gitsigns.nvim
 	if IsEnable('gitsigns.nvim') then
 		require('gitsigns').setup()
-	end
-
-	-- preservim/tagbar
-	if IsEnable('tagbar') then
-		-- sortしない
-		vim.g.tagbar_sort = 0
-		-- 行番号を表示する(1:右側, 2:左側)
-		vim.g.tagbar_show_tag_linenumbers = 1
-		-- Tagbarを開いたときに自動的にフォーカスする
-		vim.grtagbar_autofocus = 1
-		-- Tagbarの表示/非表示をF3キーに割り当て
-		map('n', '<F3>', ':TagbarOpen jf<CR>', opts)
 	end
 
 	-- williamboman/mason.nvim
@@ -169,10 +154,6 @@ end
 -- Define plugin lazy setup
 ----------------------------------------
 local lazy_setup = function()
-	-- vim-EasyMotionTarget
-	if IsEnable('vim-easymotion') then
-		vim.cmd('highlight EasyMotionTarget cterm=bold ctermbg=black ctermfg=cyan gui=bold guibg=black guifg=cyan')
-	end
 end
 
 ----------------------------------------

@@ -52,8 +52,8 @@ map('n', '<S-F12>', '@t', opts)
 -- 全て選択
 map('n', '<leader>a', 'ggVG', opts)
 -- 次/前の差分へ
-map('n', '<C-j>', ']c', opts)
-map('n', '<C-k>', '[c', opts)
+-- map('n', '<C-j>', ']c', opts)
+-- map('n', '<C-k>', '[c', opts)
 -- 文字サイズ変更
 map('n', '<C-UP>', [[:let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)+1','')<CR>]], bufopts)
 map('n', '<C-DOWN>', [[:let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)-1','')<CR>]], bufopts)

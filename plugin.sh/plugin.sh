@@ -9,25 +9,18 @@ plugindir="$HOME/vimplugins"
 # Define plugins
 #---------------------------------------
 plugins=()
-	plugins+=("jonathanfilip/vim-lucius")
-	plugins+=("easymotion/vim-easymotion")
-	plugins+=("numToStr/Comment.nvim")
-	plugins+=("sindrets/diffview.nvim")
-	plugins+=("akinsho/toggleterm.nvim")
-	plugins+=("lewis6991/gitsigns.nvim")
-	plugins+=("hedyhli/outline.nvim")
+	plugins+=("cocoon/iceberg.vim")
 	plugins+=("vim-jp/vimdoc-ja")
 	plugins+=("atsumori123/stline.vim")
 	plugins+=("atsumori123/gr.vim")
-	plugins+=("atsumori123/oldfiles.vim")
-	plugins+=("atsumori123/various.vim")
+	plugins+=("atsumori123/filefinder.vim")
+	plugins+=("atsumori123/unmemorable.vim")
 	plugins+=("atsumori123/minfy.vim")
 	plugins+=("atsumori123/oldfiles.nvim")
-	plugins+=("atsumori123/various.nvim")
-	plugins+=("neovim/nvim-lspconfig")
-	plugins+=("williamboman/mason.nvim")
-	plugins+=("williamboman/mason-lspconfig.nvim")
-	plugins+=("tpope/vim-fugitive")
+	plugins+=("atsumori123/glog.vim")
+	plugins+=("atsumori123/winbuf.vim")
+	plugins+=("atsumori123/popupmarks.vim")
+	plugins+=("atsumori123/scripts.vim")
 
 #---------------------------------------
 # Script
@@ -44,6 +37,19 @@ case $1 in
 					echo ""
 					sleep 0.5
 				fi
+			done
+		fi
+		;;
+
+	u|update)
+		if [ "$#" -eq 2 ]; then
+			git -C $plugindir/$2 pull
+		else
+			for plugin in "${plugins[@]}"; do
+				echo ">>>>> "$plugin
+				git -C $plugindir/$(basename "$plugin") pull
+				echo ""
+				sleep 0.5
 			done
 		fi
 		;;
@@ -77,6 +83,7 @@ case $1 in
 		echo "Usage:"
 		echo "  $ plug.sh [cmd] [plugin]"
 		echo "    cmd : i|install -- Install [plugin]"
+		echo "          u|update  -- Update [plugin]"
 		echo "          r|remove  -- Remove [plugin]"
 		echo "          l|list    -- List of installed plugins"
 esac
