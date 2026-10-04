@@ -101,7 +101,7 @@ vim.opt.wrapscan = false
 -- 補完設定(search from the loaded buffer)
 vim.opt.complete:append{'b'}
 -- ヤンクレジスタとクリップボードを連携する
-vim.opt.clipboard = 'unnamed'
+vim.opt.clipboard = 'unnamedplus'
 -- Tag file
 vim.opt.tags = './tags;$HOME'
 

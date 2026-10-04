@@ -30,7 +30,6 @@ call s:plug('vimdoc-ja')
 call s:plug('winbuf.vim')
 call s:plug('unmemorable.vim')
 call s:plug('glog.vim')
-call s:plug('vim-oscyank')
 call s:plug('popupmarks.vim')
 call s:plug('filefinder.vim')
 
@@ -53,8 +52,7 @@ function! s:load_config() abort
 
 	" atsumori123/stline.vim
 	if s:IsEnable('stline.vim')
-		let g:stline_theme = 'iceberg'
-"		let g:stline_theme = 'monochrome'
+		let g:stline_theme = 'iceberg'	" iceberg/monochrome
 		nmap <leader>1 <Plug>STLine.Go(1)
 		nmap <leader>2 <Plug>STLine.Go(2)
 		nmap <leader>3 <Plug>STLine.Go(3)
@@ -70,7 +68,7 @@ function! s:load_config() abort
 	" atsumori123/gr.vim
 	if s:IsEnable('gr.vim')
 		noremap <silent><leader>g :Gr<CR>
-		let g:GR_GrepCommand = 'internal'	" internal/grep/rg/git grep
+		let g:gr_grepprg = 'vim grep'	" vim grep/grep/git grep/rip grep
 	endif
 
 	" atsumori123/minfy.vim
@@ -98,15 +96,14 @@ function! s:load_config() abort
 		let g:winbuf_easymotion_enable = 1
 		let g:winbuf_taglist_enable = 1
 		let g:winbuf_switch_all_window = 1
-		let g:winbuf_shell_type = &shell
-"		let g:winbuf_shell_type = 'bash'
+		let g:winbuf_shell_type = &shell	" bash
 	endif
 
 	" atsumori123/unmemorable.vim
 	if s:IsEnable('unmemorable.vim')
 		noremap <leader>t :Unmemorable<CR>
 		let g:unmemorable_auto_complete_enable = 1
-		let g:unmemorable_osc_yank_enable = 0
+		let g:unmemorable_osc52yank = 0		" 0:OFF, 1:ON, 2:ON(cp932)
 	endif
 
 	" atsumori123/popupmarks.vim
@@ -128,25 +125,12 @@ function! s:load_config() abort
 		let g:gsign_disable = 0
 	endif
 
-	" preservim/tagbar
-	if s:IsEnable('tagbar')
-		" sortしない
-		let g:tagbar_sort = 0
-		" 行番号を表示する(1:右側, 2:左側)
-		let g:tagbar_show_tag_linenumbers = 1
-		" Tagbarを開いたときに自動的にフォーカスする
-		let g:tagbar_autofocus = 1
-		" Tagbarの表示/非表示をF3キーに割り当て
-		nnoremap <F4> :TagbarOpen fj<CR>
-	endif
-
 	" replace
 	nnoremap <leader>r :<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace('n')<CR>
 	xnoremap <leader>r :<C-u>source ~/vimplugins/scripts.vim/replace.vim<CR>:call Replace('v')<CR>
 
 	" for test
 	nnoremap <leader>[ :<C-u>source ~/vimfiles/script/test.vim<CR>
-
 endfunction
 
 "***************************************

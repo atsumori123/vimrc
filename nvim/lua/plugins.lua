@@ -26,7 +26,7 @@ vim.cmd('packadd cfilter')
 -- plug('vim-lucius')
 plug('iceberg.vim')
 plug('glog.vim')
-plug('nvim/gr.vim')
+plug('gr.vim')
 plug('unmemorable.vim')
 plug('popupmarks.vim')
 plug('minfy.vim')
@@ -69,8 +69,7 @@ local function load_config()
 	end
 
 	-- atsumori123/gr.vim
-	if IsEnable('nvim/gr.vim') then
-		require('gr').setup({grepprg = "grep"})
+	if IsEnable('gr.vim') then
 		map('n', '<leader>g', ':Gr<CR>', opts)
 		map('v', '<leader>g', ':Gr<CR>', opts)
 	end
