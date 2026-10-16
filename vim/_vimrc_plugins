@@ -25,13 +25,12 @@ endif
 call s:plug('iceberg.vim')
 call s:plug('stline.vim')
 call s:plug('gr.vim')
-call s:plug('minfy.vim')
+call s:plug('nexusfile.vim')
 call s:plug('vimdoc-ja')
 call s:plug('winbuf.vim')
 call s:plug('unmemorable.vim')
 call s:plug('glog.vim')
 call s:plug('popupmarks.vim')
-call s:plug('filefinder.vim')
 
 "***************************************
 " Define plugin loading configuration
@@ -71,9 +70,11 @@ function! s:load_config() abort
 		let g:gr_grepprg = 'vim grep'	" vim grep/grep/git grep/rip grep
 	endif
 
-	" atsumori123/minfy.vim
-	if s:IsEnable('minfy.vim')
-		nnoremap <silent>\ :execute "Minfy ".expand("%:p:h")<CR>
+	" atsumori123/nexusfile.vim
+	if s:IsEnable('nexusfile.vim')
+		nnoremap <silent>\ :execute "NXExplorer " . expand("%:p:h")<CR>
+		nnoremap <silent><c-e> :execute 'NXFinder c:\Users\atsu3\vimplugins'<CR>
+		nnoremap <silent><leader>l :NXMru<CR>
 	endif
 
 	" atsumori123/winbuf.vim
@@ -112,12 +113,6 @@ function! s:load_config() abort
 		nnoremap <silent>ma :EditMarks Add<CR>
 		nnoremap <silent>md :EditMarks Del<CR>
 		nnoremap <silent>me :EditMarks Edit<CR>
-	endif
-
-	" atsumori123/filefinder.vim
-	if s:IsEnable('filefinder.vim')
-		nnoremap <silent><c-e> :FF<CR>
-		nnoremap <silent><leader>l :OL<CR>
 	endif
 
 	" atsumori123/glog.vim

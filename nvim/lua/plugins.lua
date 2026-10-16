@@ -29,11 +29,10 @@ plug('glog.vim')
 plug('gr.vim')
 plug('unmemorable.vim')
 plug('popupmarks.vim')
-plug('minfy.vim')
+plug('nexusfile.vim')
 plug('stline.vim')
 plug('winbuf.vim')
-plug('filefinder.vim')
-plug('gitsigns.nvim')
+--plug('gitsigns.nvim')
 plug('mason.nvim')
 
 ----------------------------------------
@@ -103,9 +102,11 @@ local function load_config()
 		vim.g.winbuf_shell_type = vim.o.shell
 	end
 
-	-- atsumori123/minfy.vim
-	if IsEnable('minfy.vim') then
-		map('n', '\\', ':execute "Minfy ".expand("%:p:h")<CR>', opts)
+	-- atsumori123/nexusfile.vim
+	if IsEnable('nexusfile.vim') then
+		map('n', '\\', ':execute "NXExplorer ".expand("%:p:h")<CR>', opts)
+		map('n', '<C-e>', ':execute "NXFinder c:/Users/atsu3/vimplugins"<CR>', opts)
+		map('n', '<leader>l', ':NXMru<CR>', opts)
 	end
 
 	-- atsumori123/popupmarks.vim
@@ -114,12 +115,6 @@ local function load_config()
 		map('n', 'ma', ':EditMarks Add<CR>', opts)
 		map('n', 'md', ':EditMarks Del<CR>', opts)
 		map('n', 'me', ':EditMarks Edit<CR>', opts)
-	end
-
-	-- atsumori123/filefinder.vim
-	if IsEnable('filefinder.vim') then
-		map('n', '<C-e>', ':FF<CR>', opts)
-		map('n', '<leader>l', ':OL<CR>', opts)
 	end
 
 	-- atsumori123/glog.vim
