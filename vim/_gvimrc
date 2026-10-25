@@ -10,13 +10,10 @@ set lines=70
 
 " Harf-Width character size
 set guifont=cica:h12
-"set guifont=consolas:h11
 " Double-byte character size
 set guifontwide=cica:h12
-"set guifontwide=consolas:h11
 " Disable cursol blink
 set guicursor=a:blinkon0
-
 " Underline the current line(color terminal)
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " Underline the current line(gui)
@@ -33,4 +30,8 @@ set guioptions-=r
 set guioptions-=R
 " Hide the horizon scroll bar
 set guioptions-=b
+
+" 文字サイズ変更
+nnoremap <C-UP> :let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)+1','')<CR>
+nnoremap <C-DOWN> :let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)-1','')<CR>
 

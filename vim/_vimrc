@@ -12,10 +12,11 @@ syntax enable
 "--------------------------------
 " GUIカラーを使用する
 set termguicolors
-" UTF-8化
-set fenc=utf-8
-" Automatic Character Encording
+" カレントバッファのファイルの文字エンコーディング
+set fileencoding=utf-8
+" vim内部で使用する文字エンコーディング(vimの通常扱う文字の種類)
 set encoding=utf-8
+" 編集開始時に考慮する文字エンコーディングリスト(先頭が優先度高)
 set fileencodings=utf-8,euc-jp,sjis,iso-2022-jp
 " ファイルを上書きする前にバックアップを作ることを無効化
 set nobackup
@@ -58,8 +59,7 @@ set viminfo+=!
 " 折り畳みを無効
 set nofoldenable
 " 不可視文字(tab,行末)の設定
-"set nolist listchars=tab:\▸\-,trail:_
-set nolist listchars=tab:\|\-,trail:_
+set nolist listchars=tab:\▸\-,trail:_
 " タブ幅
 set tabstop=4
 " インデント幅
@@ -139,8 +139,6 @@ nnoremap <CR> i<CR><ESC>
 noremap <BS> i<BS><ESC>l
 " jj = <ESC>
 inoremap <silent> jj <ESC>
-" insertモードからnormalモードに戻るときIMEをオフにする
-inoremap <ESC> <ESC>:set iminsert=0<CR>
 " 記録終了のキーマップを無効
 "noremap q <nop>
 " キー操作記録開始
@@ -149,9 +147,6 @@ nnoremap <F12> qt
 noremap <S-F12> @t
 " 全て選択
 nnoremap <leader>a ggVG
-" 次/前の差分へ
-"nnoremap <C-j> ]c
-"nnoremap <C-k> [c
 " Tag jump / Back tag jump
 nnoremap t g<c-]>
 nnoremap T <C-t>
@@ -162,19 +157,33 @@ nnoremap M 'Z
 tnoremap <Esc> <C-\><C-n>
 " ターミナルモード中にCtrl+Vで、ヤンクした内容（0レジスタ）をペースト
 tnoremap <C-v> <C-W>"0
-" バッファ同士でDiff
-nnoremap <silent><F10> :execute('if &diff \| diffoff! \| else \| diffthis \| endif')<CR>
-" 文字サイズ変更
-nnoremap <C-UP> :let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)+1','')<CR>
-nnoremap <C-DOWN> :let &guifont=substitute(&guifont,'\d\+$','\=submatch(0)-1','')<CR>
 " ESCキー2回でハイライトoff
 noremap <Esc><Esc> :nohlsearch<CR><Esc>
+" バッファ同士でDiff
+nnoremap <silent><F10> :execute('if &diff \| diffoff! \| else \| diffthis \| endif')<CR>
 " 検索開始でカーソルを次の候補に移動させない
-nnoremap <silent> * :let @/ = '\<' . expand('<cword>') . '\>'<CR>:set hlsearch<CR>:call histadd("/", '\<'.expand('<cword>').'\>')<CR>
-vnoremap <silent> * "zygv<ESC>:let @/ = @z<CR>:set hlsearch<CR>:call histadd("/", @z)<CR>
-nnoremap <silent> g* :let @/ = expand('<cword>')<CR>:set hlsearch<CR>:call histadd("/", expand('<cword>'))<CR>
-" Open QuickFix window under vertical split
-autocmd Filetype qf wincmd J
-" zenhanによるinsertモードからnormalモードに戻るときIMEをオフにする
-"autocmd InsertLeave * :call system("zenhan 0")
-"autocmd CmdlineLeave * :call system("zenhan 0")
+nnoremap <silent> *
+			\ :let @/ = printf('\<%s\>', expand('<cword>'))<CR>
+			\ :set hlsearch<CR>
+			\ :call histadd("/", printf('\<%s\>', expand('<cword>')))<CR>
+nnoremap <silent> g*
+			\ :let @/ = expand('<cword>')<CR>
+			\ :set hlsearch<CR>
+			\ :call histadd("/", expand('<cword>'))<CR>
+vnoremap <silent> * "zygv<ESC>
+			\ :let @/ = @z<CR>
+			\ :set hlsearch<CR>
+			\ :call histadd("/", @z)<CR>
+
+"--------------------------------
+" IME auto off
+"--------------------------------
+if has('xim') || has('multi_byte_ime') || has('global-ime')
+	execute 'inoremap <ESC> <ESC>:set iminsert=0<CR>'
+else
+	let g:zenhan = substitute(system("which zenhan.exe"), '\n$', '', '')
+	if filereadable(g:zenhan)
+		autocmd InsertLeave * call job_start([g:zenhan, '0'])
+	endif
+endif
+
